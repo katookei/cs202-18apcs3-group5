@@ -18,6 +18,8 @@ void ThreadFunc1() {
 			newGAME.updatePosPeople(KEY);
 			KEY = NULL;
 		} 
+		newGAME.updatePosVehicle();
+		Sleep(25);
 	}
 }
 
