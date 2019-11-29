@@ -1,6 +1,0 @@
-﻿  CGAME.cpp
-  main.cpp
-C:\Users\Chau Tran\source\repos\katookei\cs202-18apcs3-group5\gameBangQuaDuong\gameBangQuaDuong\CGAME.cpp(68,20): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-C:\Users\Chau Tran\source\repos\katookei\cs202-18apcs3-group5\gameBangQuaDuong\gameBangQuaDuong\main.cpp(26,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  gameBangQuaDuong.vcxproj -> C:\Users\Chau Tran\source\repos\katookei\cs202-18apcs3-group5\gameBangQuaDuong\Debug\gameBangQuaDuong.exe
