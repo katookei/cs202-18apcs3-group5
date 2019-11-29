@@ -57,7 +57,7 @@ CGAME::~CGAME() {
 
 void CGAME::startGame() 
 {
-	//..
+	drawGame();
 }
 
 CPEOPLE CGAME::getPeople() {
@@ -77,4 +77,60 @@ vector<CVEHICLE *> CGAME::getVehicle() {
 
 vector<CANIMAL*> CGAME::getAnimal() {
 	return animals;
+}
+
+void CGAME::drawGame()
+{
+	// Ve~  thanh tren cung
+	gotoXY(2, 4);
+	cout << char(218);
+	gotoXY(116, 4);
+	cout << char(191);
+
+	for (int i = 3; i < 116; i++)
+	{
+		gotoXY(i, 4);
+		cout << char(196);
+	}
+	// Ve~ hai thanh ben canh
+	for (int i = 5; i < 28; i++)
+	{
+		gotoXY(2, i);
+		cout << char(179);
+	}
+	for (int i = 5; i < 28; i++)
+	{
+		gotoXY(116, i);
+		cout << char(179);
+	}
+	// Ve~ thanh duoi cung
+	for (int i = 3; i < 116; i++)
+	{
+		gotoXY(i, 28);
+		cout << char(196);
+	}
+	gotoXY(2, 28);
+	cout << char(192);
+	gotoXY(116, 28);
+	cout << char(217);
+
+	// Ve~ lan duong
+	for (int i = 1; i < 4; i++)
+	{
+		gotoXY(2, 4 + i * 6);
+		cout << char(198);
+	}
+	for (int i = 1; i < 4; i++)
+	{
+		gotoXY(116, 4 + i * 6);
+		cout << char(181);
+	}
+	for (int i = 1; i < 4; i++)
+	{
+		for (int k = 3; k < 116; k++)
+		{
+			gotoXY(k, 4 + i * 6);
+			cout << char(205);
+		}
+	}
 }

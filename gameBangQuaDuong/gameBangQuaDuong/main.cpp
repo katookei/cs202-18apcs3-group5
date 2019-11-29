@@ -24,8 +24,10 @@ void ThreadFunc1() {
 }
 
 void main() {
+
     thread t1(ThreadFunc1);
 	fixConsoleWindow();
+	newGAME.startGame();
 	while (1)
 	{
 		int temp = toupper(_getch());
