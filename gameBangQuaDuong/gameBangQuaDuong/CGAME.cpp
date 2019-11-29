@@ -3,10 +3,10 @@
 CGAME::CGAME() {
 	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
 	
-	temp1 = new CTRUCK;
-	temp2 = new CTRUCK(10, 22, "Left");
-	temp3 = new CTRUCK(19, 5, "Left");
-	temp4 = new CTRUCK(50, 6, "Left");
+	temp1 = new CCAR;
+	temp2 = new CCAR(10, 22);
+	temp3 = new CCAR(19, 5);
+	temp4 = new CCAR(50, 6);
 	temp5 = new CTRUCK(67, 23, "Left");
 	temp6 = new CTRUCK(13, 15, "Left");
 	temp7 = new CTRUCK(12, 23, "Left");
