@@ -11,8 +11,8 @@ public:
 	void Left(int);
 	void Right(int);
 	void Down(int);
-	bool isImpact(const CVEHICLE*&);
-	bool isImpact(const CANIMAL*&);
+	bool isImpact(const vector<CVEHICLE*>&);
+	bool isImpact(const vector<CANIMAL*>&);
 	bool isFinish();
 	bool isDead();
 };

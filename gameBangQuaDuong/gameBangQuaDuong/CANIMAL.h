@@ -4,4 +4,6 @@ class CANIMAL {
 public:
 	virtual void Move(int, int);
 	virtual void Tell();
+	int getMX();
+	int getMY();
 };

@@ -16,8 +16,8 @@ public:
 	 void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
 	 ~CGAME(); // Hủy tài nguyên đã cấp phát
 	 CPEOPLE getPeople();//Lấy thông tin người
-	 vector<CVEHICLE*> getVehicle();//Lấy danh sách các xe
-	 vector<CANIMAL*> getAnimal(); //Lấy danh sách các thú
+	 vector<CVEHICLE*>& getVehicle();//Lấy danh sách các xe
+	 vector<CANIMAL*>& getAnimal(); //Lấy danh sách các thú
 	 void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
 	 void exitGame(HANDLE); // Thực hiện thoát Thread
 	 void startGame(); // Thực hiện bắt đầu vào trò chơi

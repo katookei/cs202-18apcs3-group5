@@ -3,11 +3,11 @@
 CGAME::CGAME() {
 	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
 	
-	temp1 = new CCAR;
-	temp2 = new CCAR(10, 22);
-	temp3 = new CCAR(19, 5);
-	temp4 = new CCAR(50, 6);
-	temp5 = new CTRUCK(67, 23, "Left");
+	temp1 = new CTRUCK(3,25, "Left");
+	temp2 = new CCAR(3, 22);
+	temp3 = new CCAR(3, 5);
+	temp4 = new CCAR(3, 6);
+	temp5 = new CTRUCK(3, 23, "Left");
 	temp6 = new CTRUCK(13, 15, "Left");
 	temp7 = new CTRUCK(12, 23, "Left");
 	temp8 = new CTRUCK(20, 16, "Left");
@@ -71,11 +71,11 @@ void CGAME::updatePosVehicle() {
 	}
 }
 
-vector<CVEHICLE *> CGAME::getVehicle() {
+vector<CVEHICLE*>& CGAME::getVehicle() {
 	return vehicles;
 }
 
-vector<CANIMAL*> CGAME::getAnimal() {
+vector<CANIMAL*>& CGAME::getAnimal() {
 	return animals;
 }
 

@@ -12,22 +12,26 @@ void exitGame(thread* t) {
 }
 
 void ThreadFunc1() {
-
+	gotoXY(90, 1);
 	while (IS_RUNNING) {
 		if (KEY != NULL) {
 			newGAME.updatePosPeople(KEY);
 			KEY = NULL;
 		} 
+		
 		newGAME.updatePosVehicle();
+		if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
+			newGAME.getPeople().isImpact(newGAME.getAnimal())) {
+			IS_RUNNING = false;
+		}
 		Sleep(25);
 	}
 }
 
 void main() {
-
+	newGAME.startGame();
     thread t1(ThreadFunc1);
 	fixConsoleWindow();
-	newGAME.startGame();
 	while (1)
 	{
 		int temp = toupper(_getch());
