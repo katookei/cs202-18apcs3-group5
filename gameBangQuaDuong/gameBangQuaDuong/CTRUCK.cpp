@@ -7,7 +7,7 @@ void CTRUCK::Move() {
 	cout << " " << endl;
 	mX += 1;
 	Draw();
-	if (mX == 100 && beginSide == "Left") {
+	if (mX == 114 && beginSide == "Left") {
 		gotoXY(mX, mY);
 		cout << " " << endl;
 		gotoXY(mX + 1, mY);
@@ -24,8 +24,8 @@ void CTRUCK::Move() {
 }
 
 CTRUCK::CTRUCK() {
-	mX = 0;
-	mY = 25;
+	mX = 3;
+	mY = 15;
 	beginSide = "Left";
 }
 
@@ -36,9 +36,15 @@ CTRUCK::CTRUCK(int x, int y, string side) {
 }
 
 CTRUCK::CTRUCK(string side) {
-	mX = 0;
+	mX =  3;
 	mY = 25;
 	beginSide = side;
+}
+
+CTRUCK::CTRUCK(int x, int y) {
+	mX = x;
+	mY = y;
+	beginSide = "Left";
 }
 
 void CTRUCK::Draw() {

@@ -2,41 +2,41 @@
 
 void CCAR::draw()
 {
-	gotoXY(x, y);
+	gotoXY(mX, mY);
 	cout << char(254);
-	gotoXY(x+1, y);
+	gotoXY(mX + 1, mY);
 	cout << char(178) << endl;
-	gotoXY(x + 2, y);
+	gotoXY(mX + 2, mY);
 	cout << char(254) << endl;
 }
 CCAR::CCAR() {
-	x= 0;
-	y= 25;
+	mX = 0;
+	mY = 25;
 }
 
 CCAR::CCAR(int a, int b) {
-	x = a;
-	y = b;
+	mX = a;
+	mY = b;
 }
 void CCAR::Move()
 {
-	gotoXY(x, y);
+	gotoXY(mX, mY);
 	cout << " ";
-	gotoXY(x + 1, y);
+	gotoXY(mX + 1, mY);
 	cout << " " ;
-	gotoXY(x + 2, y);
+	gotoXY(mX + 2, mY);
 	cout << " ";
-	x++;
+	++mX;
 	draw();
-	if (x+2 == 115)
+	if (mX + 2 == 115)
 	{
-		gotoXY(x, y);
+		gotoXY(mX, mY);
 		cout << " ";
-		gotoXY(x + 1, y);
+		gotoXY(mX + 1, mY);
 		cout << " ";
-		gotoXY(x + 2, y);
+		gotoXY(mX + 2, mY);
 		cout << " ";
-		x = 0;
+		mX = 0;
 	}
 	
 	
