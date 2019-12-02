@@ -4,26 +4,26 @@ CGAME::CGAME() {
 	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
 	CANIMAL* tem1, * tem2, * tem3, * tem4;
 	
-	temp1 = new CTRUCK(3,25, "Left");
-	temp2 = new CCAR(3, 22);
-	temp3 = new CCAR(3, 5);
-	temp4 = new CCAR(3, 6);
-	temp5 = new CTRUCK(3, 23, "Left");
+	temp1 = new CDINAUSOR(3, 25);
+	temp2 = new CDINAUSOR(3, 22);
+	temp3 = new CDINAUSOR(3, 5);
+	temp4 = new CDINAUSOR(3, 13);
+	/*temp5 = new CTRUCK(3, 23, "Left");
 	temp6 = new CTRUCK(13, 15, "Left");
 	temp7 = new CTRUCK(12, 23, "Left");
 	temp8 = new CTRUCK(20, 16, "Left");
-	temp9 = new CTRUCK(18, 13, "Left");
+	temp9 = new CTRUCK(18, 13, "Left");*/
 	
 
-	vehicles.push_back(temp1);
-	vehicles.push_back(temp2);
-	vehicles.push_back(temp3);
-	vehicles.push_back(temp4);
-	vehicles.push_back(temp5);
+	animals.push_back(temp1);
+	animals.push_back(temp2);
+	animals.push_back(temp3);
+	animals.push_back(temp4);
+	/*vehicles.push_back(temp5);
 	vehicles.push_back(temp6);
 	vehicles.push_back(temp7);
 	vehicles.push_back(temp8);
-	vehicles.push_back(temp9);
+	vehicles.push_back(temp9);*/
 
 	tem1 = new CBIRD(6, 7);
 	tem2 = new CBIRD(8, 20);
@@ -86,7 +86,12 @@ void CGAME::updatePosVehicle() {
 		vehicles[i]->Move();
 	}
 }
-
+void CGAME::updatePosAnimal() {
+	for (int i = 0;i < animals.size();i++)
+	{
+		animals[i]->Move(0,0);
+	}
+}
 vector<CVEHICLE*>& CGAME::getVehicle() {
 	return vehicles;
 }
