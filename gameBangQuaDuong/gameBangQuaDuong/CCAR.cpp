@@ -36,7 +36,7 @@ void CCAR::Move()
 		cout << " ";
 		gotoXY(mX + 2, mY);
 		cout << " ";
-		mX = 0;
+		mX = 3;
 	}
 	
 	

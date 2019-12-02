@@ -20,6 +20,7 @@ void ThreadFunc1() {
 		} 
 		
 		newGAME.updatePosVehicle();
+		newGAME.updatePosAnimal();
 		if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
 			newGAME.getPeople().isImpact(newGAME.getAnimal())) {
 			IS_RUNNING = false;
