@@ -28,7 +28,7 @@ void CCAR::Move()
 	cout << " ";
 	++mX;
 	draw();
-	if (mX + 2 == 115)
+	if (mX + 2 == 114)
 	{
 		gotoXY(mX, mY);
 		cout << " ";

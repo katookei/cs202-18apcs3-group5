@@ -1,4 +1,8 @@
 #pragma once
+#include "Header.h"
+#include <iostream>
+using namespace std;
+
 class CANIMAL {
 protected:
 	int mX, mY;

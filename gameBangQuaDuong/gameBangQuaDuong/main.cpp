@@ -26,6 +26,9 @@ void ThreadFunc1() {
 			IS_RUNNING = false;
 		}
 		Sleep(25);
+		
+		
+
 	}
 }
 
