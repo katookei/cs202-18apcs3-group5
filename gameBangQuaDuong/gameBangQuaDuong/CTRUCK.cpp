@@ -12,7 +12,7 @@ void CTRUCK::Move() {
 		cout << " " << endl;
 		gotoXY(mX + 1, mY);
 		cout << " " << endl;
-		mX = 0;
+		mX = 3;
 	}
 	/*if (mX == 0 && beginSide == "Right") {
 		gotoXY(mX, mY);

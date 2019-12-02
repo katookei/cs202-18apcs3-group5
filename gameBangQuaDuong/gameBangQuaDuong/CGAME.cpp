@@ -2,6 +2,7 @@
 
 CGAME::CGAME() {
 	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
+	CANIMAL* tem1, * tem2, * tem3, * tem4;
 	
 	temp1 = new CTRUCK(3,25, "Left");
 	temp2 = new CCAR(3, 22);
@@ -24,6 +25,15 @@ CGAME::CGAME() {
 	vehicles.push_back(temp8);
 	vehicles.push_back(temp9);
 
+	tem1 = new CBIRD(6, 7);
+	tem2 = new CBIRD(8, 20);
+	tem3 = new CBIRD(5, 10);
+	tem4 = new CBIRD(15, 6);
+
+	animals.push_back(tem1);
+	animals.push_back(tem2);
+	animals.push_back(tem3);
+	animals.push_back(tem4);
 }
 
 void CGAME::updatePosPeople(int mov) {
@@ -50,7 +60,13 @@ void CGAME::updatePosPeople(int mov) {
 		}
     }
 }
-
+void CGAME::updatePosAnimal()
+{
+	for (int i = 0; i < animals.size(); i++)
+	{
+		animals[i]->Move(1, 1);
+	}
+}
 CGAME::~CGAME() {
 	//...
 }
