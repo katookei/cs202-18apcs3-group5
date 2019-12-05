@@ -4,8 +4,9 @@ CGAME::CGAME() {
 	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
 	CANIMAL* tem1, * tem2, * tem3, * tem4;
 	
-	
-	temp5 = new CTRUCK(3, 23, "Left");
+	/*tem1 = new CDINAUSOR(100, 5, "Right");
+	tem2= new CDINAUSOR(3, 10, "Left");*/
+	temp5 = new CCAR(3, 23, "Right");
 	temp6 = new CTRUCK(13, 15, "Left");
 	temp7 = new CTRUCK(12, 23, "Left");
 	temp8 = new CTRUCK(20, 16, "Left");
@@ -21,8 +22,8 @@ CGAME::CGAME() {
 
 	tem1 = new CBIRD(6, 7);
 	tem2 = new CBIRD(8, 20);
-	tem3 = new CDINAUSOR(5, 10);
-	tem4 = new CDINAUSOR(15, 6);
+	tem3 = new CDINAUSOR(5, 10,"Left");
+	tem4 = new CDINAUSOR(100, 7,"Right");
 
 	animals.push_back(tem1);
 	animals.push_back(tem2);

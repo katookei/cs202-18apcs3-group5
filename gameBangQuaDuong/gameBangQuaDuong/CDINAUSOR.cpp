@@ -2,16 +2,32 @@
 
 void CDINAUSOR::draw()
 {
-	gotoXY(mX, mY);
-	cout << char(219);
-	gotoXY(mX + 1, mY);
-	cout << char(219) << endl;
-	gotoXY(mX + 1, mY-1);
-	cout << char(219) << endl;
-	gotoXY(mX + 2, mY - 1);
-	cout << char(219) << endl;
-	gotoXY(mX + 2, mY - 2);
-	cout << char(220) << endl;
+	if (beginSide == "Left")
+	{
+		gotoXY(mX, mY);
+		cout << char(219);
+		gotoXY(mX + 1, mY);
+		cout << char(219) << endl;
+		gotoXY(mX + 1, mY - 1);
+		cout << char(219) << endl;
+		gotoXY(mX + 2, mY - 1);
+		cout << char(219) << endl;
+		gotoXY(mX + 2, mY - 2);
+		cout << char(220) << endl;
+	}
+	else
+	{
+		gotoXY(mX, mY);
+		cout << char(219);
+		gotoXY(mX -1,mY);
+		cout << char(219) << endl;
+		gotoXY(mX -1, mY - 1);
+		cout << char(219) << endl;
+		gotoXY(mX - 2, mY - 1);
+		cout << char(219) << endl;
+		gotoXY(mX - 2, mY - 2);
+		cout << char(220) << endl;
+	}
 }
 void CDINAUSOR::Tell()
 {
@@ -26,21 +42,26 @@ CDINAUSOR::CDINAUSOR(int a, int b) {
 	mX = a;
 	mY = b;
 }
+
+CDINAUSOR::CDINAUSOR(int a, int b, string c)
+{
+	mX = a;
+	mY = b;
+	beginSide = c;
+}
 void CDINAUSOR::Move(int,int)
 {
-	gotoXY(mX, mY);
+	/*gotoXY(mX, mY);
 	cout << " ";
-	gotoXY(mX + 1, mY);
+	gotoXY(mX - 1, mY);
 	cout << " " << endl;
-	gotoXY(mX + 1, mY - 1);
+	gotoXY(mX - 1, mY - 1);
 	cout << " " << endl;
-	gotoXY(mX + 2, mY - 1);
+	gotoXY(mX - 2, mY - 1);
 	cout << " " << endl;
-	gotoXY(mX + 2, mY - 2);
-	cout << " " << endl;
-	++mX;
-	draw();
-	if (mX + 2 == 114)
+	gotoXY(mX - 2, mY - 2);
+	cout << " " << endl;*/
+	if (beginSide == "Left")
 	{
 		gotoXY(mX, mY);
 		cout << " ";
@@ -52,8 +73,53 @@ void CDINAUSOR::Move(int,int)
 		cout << " " << endl;
 		gotoXY(mX + 2, mY - 2);
 		cout << " " << endl;
+		++mX;
+		draw();
+		if (mX + 2 == 114)
+		{
+		gotoXY(mX, mY);
+		cout << " ";
+		gotoXY(mX + 1, mY);
+		cout << " " << endl;
+		gotoXY(mX + 1, mY - 1);
+		cout << " " << endl;
+		gotoXY(mX + 2, mY - 1);
+		cout << " " << endl;
+		gotoXY(mX + 2, mY - 2);
+		cout << " " << endl;
 		mX = 0;
+		}
 	}
+	else
+	{
+		gotoXY(mX, mY);
+		cout << " ";
+		gotoXY(mX - 1, mY);
+		cout << " " << endl;
+		gotoXY(mX - 1, mY - 1);
+		cout << " " << endl;
+		gotoXY(mX - 2, mY - 1);
+		cout << " " << endl;
+		gotoXY(mX - 2, mY - 2);
+		cout << " " << endl;
+		--mX;
+		draw();
+		if (mX - 2 == 0)
+		{
+			gotoXY(mX, mY);
+			cout << " ";
+			gotoXY(mX - 1, mY);
+			cout << " " << endl;
+			gotoXY(mX - 1, mY - 1);
+			cout << " " << endl;
+			gotoXY(mX - 2, mY - 1);
+			cout << " " << endl;
+			gotoXY(mX - 2, mY - 2);
+			cout << " " << endl;
+			mX = 100;
+		}
+	}
+	
 
 
 }
