@@ -61,3 +61,13 @@ CPEOPLE::CPEOPLE() {
 	gotoXY(mX, mY);
 	cout << "Y" << endl;
 }
+
+int CPEOPLE::getX()
+{
+	return mX;
+}
+
+int CPEOPLE::getY()
+{
+	return mY;
+}
