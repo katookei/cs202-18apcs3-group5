@@ -8,6 +8,7 @@
 
 class CGAME
 {
+	bool isGamePaused = false;
 	vector<CVEHICLE*> vehicles;
 	vector<CANIMAL*> animals;
 	CPEOPLE cn;
@@ -23,10 +24,13 @@ public:
 	 void startGame(); // Thực hiện bắt đầu vào trò chơi
 	 void loadGame(istream); // Thực hiện tải lại trò chơi đã lưu
 	 void saveGame(istream); // Thực hiện lưu lại dữ liệu trò chơi
-	 void pauseGame(HANDLE); // Tạm dừng Thread
-	 void resumeGame(HANDLE); //Quay lai Thread
+	 void pauseGame(); // Tạm dừng Thread
+	 void resumeGame(); //Quay lai Thread
 	 void updatePosPeople(int); //Thực hiện điều khiển di chuyển của CPEOPLE
 	 void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
 	 void updatePosAnimal();//Thực hiện cho CDINAUSOR & CBIRD di chuyển
+	 bool getIsPaused();
+	 void printPauseGameMenu();
+	 void erasePasueGameMenu();
 };
 
