@@ -5,10 +5,10 @@ CGAME::CGAME() {
 	CANIMAL* tem1, * tem2, * tem3, * tem4;
 	
 	
-	temp5 = new CTRUCK(3, 23, "Left");
-	temp6 = new CTRUCK(13, 15, "Left");
-	temp7 = new CTRUCK(12, 23, "Left");
-	temp8 = new CTRUCK(20, 16, "Left");
+	temp5 = new CTRUCK(4, 23, "Left");
+	temp6 = new CTRUCK(13, 21, "Left");
+	temp7 = new CTRUCK(12, 25, "Left");
+	temp8 = new CTRUCK(20, 13, "Left");
 	temp9 = new CTRUCK(18, 13, "Left");
 	
 
@@ -19,10 +19,10 @@ CGAME::CGAME() {
 	vehicles.push_back(temp8);
 	vehicles.push_back(temp9);
 
-	tem1 = new CBIRD(6, 7);
-	tem2 = new CBIRD(8, 20);
-	tem3 = new CDINAUSOR(5, 10);
-	tem4 = new CDINAUSOR(15, 6);
+	tem1 = new CBIRD(6, 5);
+	tem2 = new CBIRD(8, 23);
+	tem3 = new CDINAUSOR(6, 19);
+	tem4 = new CDINAUSOR(15, 13);
 
 	animals.push_back(tem1);
 	animals.push_back(tem2);
@@ -35,18 +35,82 @@ void CGAME::updatePosPeople(int mov) {
 	{
 	    case 80: {
 	    	cn.Down(1);
+			for (int i = 1; i < 4; ++i)
+				if (getPeople().getY() - 1 == 4 + i * 6)
+				{
+					gotoXY(getPeople().getX(), getPeople().getY() - 1);
+					cout << char(205);
+				}
+			if ((getPeople().getX() == 2 || getPeople().getX() == 116) && getPeople().getY() > 4 && getPeople().getY() < 26)
+			{
+				gotoXY(getPeople().getX(), getPeople().getY() - 1);
+				cout << char(179);
+			}
+			if (getPeople().getY() - 1 == 4)
+			{
+				gotoXY(getPeople().getX(), getPeople().getY() - 1);
+				cout << char(196);
+			}
 	    	break;
 	    }
 	    case 72: {
 	    	cn.Up(1);
+			for (int i = 1; i < 4; ++i)
+				if (getPeople().getY() + 1 == 4 + i * 6)
+				{
+					gotoXY(getPeople().getX(), getPeople().getY() + 1);
+					cout << char(205);
+				}
+			if ((getPeople().getX() == 2 || getPeople().getX() == 116) && getPeople().getY() > 4 && getPeople().getY() < 26)
+			{
+				gotoXY(getPeople().getX(), getPeople().getY() + 1);
+				cout << char(179);
+			}
+			if (getPeople().getY() + 1 == 28)
+			{
+				gotoXY(getPeople().getX(), getPeople().getY() + 1);
+				cout << char(196);
+			}
 	    	break;
 	    }
 	    case 75: {
 	    	cn.Left(1);
+			for (int i = 1; i < 4; ++i)
+				if (getPeople().getY() == 4 + i * 6)
+				{
+					gotoXY(getPeople().getX() + 1, getPeople().getY());
+					cout << char(205);
+				}
+			if ((getPeople().getY() == 28 || getPeople().getY() == 4) && getPeople().getX() > 2 && getPeople().getX() < 116)
+			{
+				gotoXY(getPeople().getX() + 1, getPeople().getY());
+				cout << char(196);
+			}
+			if (getPeople().getX() + 1 == 116 && getPeople().getX() > 2 && getPeople().getX() < 116)
+			{
+				gotoXY(getPeople().getX() + 1, getPeople().getY());
+				cout << char(179);
+			}
 	    	break;
 	    }
 	    case 77: {
 	    	cn.Right(1);
+			for (int i = 1; i < 4; ++i)
+				if (getPeople().getY() == 4 + i * 6)
+				{
+					gotoXY(getPeople().getX() - 1, getPeople().getY());
+					cout << char(205);
+				}
+			if ((getPeople().getY() == 28 || getPeople().getY() == 4) && getPeople().getX() > 2 && getPeople().getX() < 116)
+			{
+				gotoXY(getPeople().getX() - 1, getPeople().getY());
+				cout << char(196);
+			}
+			if (getPeople().getX() - 1 == 2)
+			{
+				gotoXY(getPeople().getX() - 1, getPeople().getY());
+				cout << char(179);
+			}
 	    	break;
 	    }
 		default: {

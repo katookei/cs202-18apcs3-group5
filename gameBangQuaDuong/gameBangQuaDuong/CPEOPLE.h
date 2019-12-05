@@ -15,4 +15,6 @@ public:
 	bool isImpact(const vector<CANIMAL*>&);
 	bool isFinish();
 	bool isDead();
+	int getX();
+	int getY();
 };

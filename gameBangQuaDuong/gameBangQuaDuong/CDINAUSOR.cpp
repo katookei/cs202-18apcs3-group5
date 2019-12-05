@@ -52,7 +52,7 @@ void CDINAUSOR::Move(int,int)
 		cout << " " << endl;
 		gotoXY(mX + 2, mY - 2);
 		cout << " " << endl;
-		mX = 0;
+		mX = 3;
 	}
 
 
