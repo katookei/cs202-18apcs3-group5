@@ -12,18 +12,17 @@ void exitGame(thread* t) {
 }
 
 void ThreadFunc1() {
-	gotoXY(90, 1);
 	while (IS_RUNNING) {
-		if (KEY != NULL) {
-			newGAME.updatePosPeople(KEY);
-			KEY = NULL;
-		} 
-		
-		newGAME.updatePosVehicle();
-		newGAME.updatePosAnimal();
-		if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
-			newGAME.getPeople().isImpact(newGAME.getAnimal())) {
-			IS_RUNNING = false;
+		if (!newGAME.getIsPaused()) {
+			if (KEY != NULL) {
+				newGAME.updatePosPeople(KEY);
+				KEY = NULL;
+			}
+			newGAME.updatePosVehicle();
+			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
+				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
+				IS_RUNNING = false;
+			}
 		}
 		Sleep(25);
 		
@@ -39,12 +38,14 @@ void main() {
 	while (1)
 	{
 		int temp = toupper(_getch());
-		KEY = temp;
+		KEY    = temp;
 		switch (temp) {
 		    case 27: {
-		    	exitGame(&t1);
-		    	return;
+				newGAME.pauseGame();
+				break;
 		    }
+			
+		    
 		   //..
 		}
 

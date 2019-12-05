@@ -153,6 +153,66 @@ vector<CANIMAL*>& CGAME::getAnimal() {
 	return animals;
 }
 
+void CGAME::pauseGame() {
+	isGamePaused = true;
+	printPauseGameMenu();
+}
+
+void CGAME::erasePasueGameMenu() {
+	gotoXY(50, 10);
+	cout << char(205) << char(205) << char(205)
+		 << char(205) << char(205) << char(205) 
+		 << char(205) << char(205) << char(205)
+		 << char(205) << char(205) << char(205) << endl;
+	gotoXY(50, 11);
+	cout << "         " << endl;
+	gotoXY(50, 12);
+	cout << "            " << endl;
+	gotoXY(50, 13);
+	cout << "            " << endl;
+	gotoXY(50, 14);
+	cout << "               " << endl;
+	// give time for window cursor to move to the right coordinate
+}
+
+
+void CGAME::printPauseGameMenu() {
+	Sleep(100);
+	// give time for window cursor to move to the right coordinate
+	gotoXY(50, 10);
+	cout << "game paused" << endl;
+	gotoXY(50, 11);
+	cout << "Resume(R)" << endl;
+	gotoXY(50, 12);
+	cout << "Save game(S)" << endl;
+	gotoXY(50, 13);
+	cout << "Quit game(Q)" << endl;
+	while (1) {
+		bool pauseFlag = true;
+		char temp = toupper(_getch());
+		gotoXY(50, 14);
+		cout << "You pressed: " << temp;
+		switch (temp)
+		{
+		case 13: {
+			pauseFlag = false;
+			erasePasueGameMenu();
+			resumeGame();
+			break;
+		}
+		default:
+			break;
+		}
+		if (!pauseFlag) {
+			break;
+		}
+	}
+}
+
+void CGAME::resumeGame() {
+	isGamePaused = false;
+}
+
 void CGAME::drawGame()
 {
 	// Ve~  thanh tren cung
@@ -207,4 +267,8 @@ void CGAME::drawGame()
 			cout << char(205);
 		}
 	}
+}
+
+bool CGAME::getIsPaused() {
+	return isGamePaused;
 }
