@@ -34,3 +34,5 @@ public:
 	 void erasePasueGameMenu();
 };
 
+void PrintMenu();
+
