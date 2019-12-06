@@ -208,3 +208,15 @@ void CGAME::drawGame()
 		}
 	}
 }
+
+void PrintMenu()
+{
+	gotoXY(50, 10);
+	cout << "1. Start game";
+	gotoXY(50, 11);
+	cout << "2. Save game";
+	gotoXY(50, 12);
+	cout << "3. Load game";
+	gotoXY(50, 13);
+	cout << "4. Exit game";
+}
