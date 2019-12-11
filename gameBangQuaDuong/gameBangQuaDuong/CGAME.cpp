@@ -4,11 +4,12 @@ CGAME::CGAME() {
 	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
 	CANIMAL* tem1, * tem2, * tem3, * tem4;
 	
-	
-	temp5 = new CTRUCK(4, 23, "Left");
-	temp6 = new CTRUCK(13, 21, "Left");
-	temp7 = new CTRUCK(12, 25, "Left");
-	temp8 = new CTRUCK(20, 13, "Left");
+	/*tem1 = new CDINAUSOR(100, 5, "Right");
+	tem2= new CDINAUSOR(3, 10, "Left");*/
+	temp5 = new CCAR(3, 23, "Right");
+	temp6 = new CTRUCK(13, 15, "Left");
+	temp7 = new CTRUCK(12, 23, "Left");
+	temp8 = new CTRUCK(20, 16, "Left");
 	temp9 = new CTRUCK(18, 13, "Left");
 	
 
@@ -19,10 +20,10 @@ CGAME::CGAME() {
 	vehicles.push_back(temp8);
 	vehicles.push_back(temp9);
 
-	tem1 = new CBIRD(6, 5);
-	tem2 = new CBIRD(8, 23);
-	tem3 = new CDINAUSOR(6, 19);
-	tem4 = new CDINAUSOR(15, 13);
+	tem1 = new CBIRD(6, 7);
+	tem2 = new CBIRD(8, 20);
+	tem3 = new CDINAUSOR(5, 10,"Left");
+	tem4 = new CDINAUSOR(100, 7,"Right");
 
 	animals.push_back(tem1);
 	animals.push_back(tem2);
@@ -153,6 +154,66 @@ vector<CANIMAL*>& CGAME::getAnimal() {
 	return animals;
 }
 
+void CGAME::pauseGame() {
+	isGamePaused = true;
+	printPauseGameMenu();
+}
+
+void CGAME::erasePasueGameMenu() {
+	gotoXY(50, 10);
+	cout << char(205) << char(205) << char(205)
+		 << char(205) << char(205) << char(205) 
+		 << char(205) << char(205) << char(205)
+		 << char(205) << char(205) << char(205) << endl;
+	gotoXY(50, 11);
+	cout << "         " << endl;
+	gotoXY(50, 12);
+	cout << "            " << endl;
+	gotoXY(50, 13);
+	cout << "            " << endl;
+	gotoXY(50, 14);
+	cout << "               " << endl;
+	// give time for window cursor to move to the right coordinate
+}
+
+
+void CGAME::printPauseGameMenu() {
+	Sleep(100);
+	// give time for window cursor to move to the right coordinate
+	gotoXY(50, 10);
+	cout << "game paused" << endl;
+	gotoXY(50, 11);
+	cout << "Resume(R)" << endl;
+	gotoXY(50, 12);
+	cout << "Save game(S)" << endl;
+	gotoXY(50, 13);
+	cout << "Quit game(Q)" << endl;
+	while (1) {
+		bool pauseFlag = true;
+		char temp = toupper(_getch());
+		gotoXY(50, 14);
+		cout << "You pressed: " << temp;
+		switch (temp)
+		{
+		case 13: {
+			pauseFlag = false;
+			erasePasueGameMenu();
+			resumeGame();
+			break;
+		}
+		default:
+			break;
+		}
+		if (!pauseFlag) {
+			break;
+		}
+	}
+}
+
+void CGAME::resumeGame() {
+	isGamePaused = false;
+}
+
 void CGAME::drawGame()
 {
 	// Ve~  thanh tren cung
@@ -207,6 +268,22 @@ void CGAME::drawGame()
 			cout << char(205);
 		}
 	}
+}
+
+void PrintMenu()
+{
+	gotoXY(50, 10);
+	cout << "1. Start game";
+	gotoXY(50, 11);
+	cout << "2. Save game";
+	gotoXY(50, 12);
+	cout << "3. Load game";
+	gotoXY(50, 13);
+	cout << "4. Exit game";
+}
+
+bool CGAME::getIsPaused() {
+	return isGamePaused;
 }
 
 void PrintMenu()

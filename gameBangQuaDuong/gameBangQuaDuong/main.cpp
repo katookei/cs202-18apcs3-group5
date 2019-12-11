@@ -1,4 +1,4 @@
-﻿#include"CGAME.h"
+#include"CGAME.h"
 using namespace std;
 
 bool IS_RUNNING = true;
@@ -12,20 +12,22 @@ void exitGame(thread *t1) {
 }
 
 void ThreadFunc1() {
-	gotoXY(90, 1);
 	while (IS_RUNNING) {
-		if (KEY != NULL) {
-			newGAME.updatePosPeople(KEY);
-			KEY = NULL;
-		} 
+		if (!newGAME.getIsPaused()) {
+			if (KEY != NULL) {
+				newGAME.updatePosPeople(KEY);
+				KEY = NULL;
+			}
+			newGAME.updatePosVehicle();
+			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
+				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
+				IS_RUNNING = false;
+                system("cls");
+			    PrintMenu();
+                system("cls");
+		    	PrintMenu();
+			}
 		
-		newGAME.updatePosVehicle();
-		newGAME.updatePosAnimal();
-		if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
-			newGAME.getPeople().isImpact(newGAME.getAnimal())) {
-			IS_RUNNING = false;
-			system("cls");
-			PrintMenu();
 		}
 		Sleep(25);
 	}
@@ -51,6 +53,10 @@ void menuScreen(int option)
 				KEY = temp;
 				switch (KEY)
 				{
+				case 27: {
+					newGAME.pauseGame();
+					break;
+				}
 				case 52:
 				{
 					exitGame(&t1);
