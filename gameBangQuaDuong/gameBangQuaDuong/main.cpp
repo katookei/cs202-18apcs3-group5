@@ -1,4 +1,4 @@
-﻿#include"CGAME.h"
+#include"CGAME.h"
 using namespace std;
 
 bool IS_RUNNING = true;
@@ -50,6 +50,10 @@ void menuScreen(int option)
 				KEY = temp;
 				switch (KEY)
 				{
+				case 27: {
+					newGAME.pauseGame();
+					break;
+				}
 				case 52:
 				{
 					exitGame(&t1);
