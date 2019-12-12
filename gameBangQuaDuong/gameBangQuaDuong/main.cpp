@@ -25,6 +25,10 @@ void ThreadFunc1() {
                 system("cls");
 			    PrintMenu();
 			}
+			if (newGAME.isFinish())
+			{
+				IS_RUNNING = false;
+			}
 		}
 		Sleep(25);
 	}

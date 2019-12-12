@@ -6,6 +6,11 @@
 #include"CDINAUSOR.h"
 #include"CPEOPLE.h"
 
+#define TOP 4
+#define BOTTOM 28
+#define LEFT 2
+#define RIGHT 116
+
 class CGAME
 {
 	bool isGamePaused = false;
@@ -32,6 +37,7 @@ public:
 	 bool getIsPaused();
 	 void printPauseGameMenu();
 	 void erasePasueGameMenu();
+	 bool isFinish();
 };
 
 void PrintMenu();
