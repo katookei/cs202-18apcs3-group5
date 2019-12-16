@@ -14,5 +14,6 @@ public:
 	void updateStatus();
 	bool isTouched(int x, int y);
 	int getType();
+	int type = 1;
 };
 

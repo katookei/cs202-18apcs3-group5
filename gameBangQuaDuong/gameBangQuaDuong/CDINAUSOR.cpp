@@ -161,5 +161,5 @@ bool CDINAUSOR::isTouched(int x, int y) {
 }
 
 int CDINAUSOR::getType() {
-	return 3;
+	return type;
 }

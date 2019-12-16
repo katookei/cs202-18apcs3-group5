@@ -98,5 +98,5 @@ bool CTRUCK::isTouched(int x, int y) {
 }
 
 int CTRUCK::getType() {
-	return 4;
+	return type;
 }
