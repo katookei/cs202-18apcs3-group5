@@ -3,7 +3,7 @@ using namespace std;
 
 bool IS_RUNNING = true;
 int KEY = NULL;
-CGAME newGAME;
+CGAME newGAME(1);
 
 void exitGame(thread *t1) {
 	system("cls");
@@ -19,6 +19,7 @@ void ThreadFunc1() {
 				KEY = NULL;
 			}
 			newGAME.updatePosVehicle();
+			newGAME.updatePosAnimal();
 			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
 				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
 				IS_RUNNING = false;

@@ -13,12 +13,13 @@
 
 class CGAME
 {
+	int lvl = 1;
 	bool isGamePaused = false;
 	vector<CVEHICLE*> vehicles;
 	vector<CANIMAL*> animals;
 	CPEOPLE cn;
 public:
-	 CGAME(); //Chuẩn bị dữ liệu cho tất cả các đối tượng
+	 CGAME(int n); //Chuẩn bị dữ liệu cho tất cả các đối tượng
 	 void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
 	 ~CGAME(); // Hủy tài nguyên đã cấp phát
 	 CPEOPLE getPeople();//Lấy thông tin người
@@ -38,6 +39,7 @@ public:
 	 void printPauseGameMenu();
 	 void erasePasueGameMenu();
 	 bool isFinish();
+	 void initialForStage(int);
 };
 
 void PrintMenu();
