@@ -288,7 +288,35 @@ void CGAME::levelUp()
 	system("cls");
 	startGame();
 	cn.resetPoṣ̣();
-	level2Init();
+	switch (lvl)
+	{
+	case 2:
+	{
+		level2Init();
+		break;
+	}
+	case 3:
+	{
+		level3Init();
+		break;
+	}
+	case 4:
+	{
+		level4Init();
+		break;
+	}
+	case 5:
+	{
+		level5Init();
+		break;
+	}
+	case 6:
+	{
+	//	win();
+		break;
+	}
+	}
+
 }
 
 void CGAME::resetGame()
@@ -332,12 +360,157 @@ void CGAME::level2Init() {
 	vehicles.push_back(temp1);
 	vehicles.push_back(temp4);
 	vehicles.push_back(temp5);
-	vehicles.push_back(temp9);
-	vehicles.push_back(temp8);
 	animals.push_back(temp2);
 	animals.push_back(temp3);
 	animals.push_back(temp6);
 	animals.push_back(temp7);
+}
+
+void CGAME::level3Init()
+{
+	vehicles.clear();
+	animals.clear();
+#pragma region VEHICLES
+	CVEHICLE* temp = new CTRUCK(7, LINE1, "Left");
+	CVEHICLE* temp1 = new CCAR(7, LINE2, "Left");
+	CVEHICLE* temp4 = new CTRUCK(RIGHT - 7, LINE1, "Right");
+	CVEHICLE* temp5 = new CCAR(RIGHT - 7, LINE2, "Right");
+	CVEHICLE* Cars[5];
+	CVEHICLE* Trucks[5];
+	for (int i = 0; i < 5; ++i)
+	{
+		Cars[i] = new CCAR(5 + i * 7, LINE3 + 2, "Left");
+		vehicles.push_back(Cars[i]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE3 - 2, "Left");
+		vehicles.push_back(Trucks[i]);
+	}
+#pragma endregion
+
+#pragma region ANIMAL
+	CANIMAL* temp2 = new CBIRD(5, LINE1, "Left");
+	CANIMAL* temp3 = new CDINAUSOR(5, LINE2, "Left");
+	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE2, "Right");
+	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE1, "Right");
+	CANIMAL* Birds[5];
+	CANIMAL* Dinausors[5];
+	for (int i = 0; i < 5; ++i)
+	{
+		Birds[i] = new CBIRD(5 +  i * 7, LINE4 - 2 , "Left");
+		animals.push_back(Birds[i]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Dinausors[i] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4 + 2, "Right");
+		animals.push_back(Dinausors[i]);
+	}
+#pragma endregion
+
+	vehicles.push_back(temp);
+	vehicles.push_back(temp1);
+	vehicles.push_back(temp4);
+	vehicles.push_back(temp5);
+	animals.push_back(temp2);
+	animals.push_back(temp3);
+	animals.push_back(temp6);
+	animals.push_back(temp7);
+}
+
+void CGAME::level5Init()
+{
+	vehicles.clear();
+	animals.clear();
+#pragma region VEHICLES
+	CVEHICLE* Cars[15];
+	CVEHICLE* Trucks[15];
+	for (int i = 0; i < 5; ++i)
+	{
+		Cars[i] = new CCAR(5 + i * 7, LINE3 + 2, "Left");
+		vehicles.push_back(Cars[i]);
+		Cars[i + 5] = new CCAR(5 + i * 7, LINE1 - 2, "Left");
+		vehicles.push_back(Cars[i + 5]);
+		Cars[i + 10] = new CCAR((LEFT + RIGHT) / 3 + i * 7, LINE1, "Left");
+		vehicles.push_back(Cars[i + 10]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE3 - 2, "Left");
+		vehicles.push_back(Trucks[i]);
+		Trucks[i + 5] = new CTRUCK(RIGHT - 3, LINE1 + 2, "Right");
+		vehicles.push_back(Trucks[i + 5]);
+		Trucks[i + 10] = new CTRUCK((LEFT + RIGHT) * 2 / 3 - i * 7, LINE2, "Right");
+		vehicles.push_back(Trucks[i + 10]);
+
+	}
+#pragma endregion
+
+#pragma region ANIMAL
+	CANIMAL* Birds[15];
+	CANIMAL* Dinausors[15];
+	for (int i = 0; i < 5; ++i)
+	{
+		Birds[i] = new CBIRD(5 + i * 7, LINE4 - 2, "Left");
+		animals.push_back(Birds[i]);
+		Birds[i + 5] = new CBIRD(5 + i * 7, LINE2 - 2, "Left");
+		animals.push_back(Birds[i + 5]);
+		Birds[i + 10] = new CBIRD((LEFT + RIGHT) / 3 + i * 7, LINE3, "Left");
+		animals.push_back(Birds[i + 10]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Dinausors[i] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4 + 2, "Right");
+		animals.push_back(Dinausors[i]);
+		Dinausors[i + 5] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE2 + 2, "Right");
+		animals.push_back(Dinausors[i + 5]);
+		Dinausors[i + 10] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4, "Right");
+		animals.push_back(Dinausors[i + 10]);
+	}
+#pragma endregion
+}
+
+void CGAME::level4Init()
+{
+	vehicles.clear();
+	animals.clear();
+#pragma region VEHICLES
+	CVEHICLE* Cars[10];
+	CVEHICLE* Trucks[10];
+	for (int i = 0; i < 5; ++i)
+	{
+		Cars[i] = new CCAR(5 + i * 7, LINE3 + 2, "Left");
+		vehicles.push_back(Cars[i]);
+		Cars[i + 5] = new CCAR(5 + i * 7, LINE1 - 2, "Left");
+		vehicles.push_back(Cars[i + 5]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE3 - 2, "Left");
+		vehicles.push_back(Trucks[i]);
+		Trucks[i + 5] = new CTRUCK(RIGHT - 3, LINE1 + 2, "Right");
+		vehicles.push_back(Trucks[i+5]);
+	}
+#pragma endregion
+
+#pragma region ANIMAL
+	CANIMAL* Birds[10];
+	CANIMAL* Dinausors[10];
+	for (int i = 0; i < 5; ++i)
+	{
+		Birds[i] = new CBIRD(5 + i * 7, LINE4 - 2, "Left");
+		animals.push_back(Birds[i]);
+		Birds[i + 5] = new CBIRD(5 + i * 7, LINE2 - 2, "Left");
+		animals.push_back(Birds[i + 5]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Dinausors[i] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4 + 2, "Right");
+		animals.push_back(Dinausors[i]);
+		Dinausors[i + 5] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE2 + 2, "Right");
+		animals.push_back(Dinausors[i + 5]);
+	}
+#pragma endregion
 }
 
 

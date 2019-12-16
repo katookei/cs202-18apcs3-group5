@@ -23,7 +23,7 @@ void CTRUCK::Move() {
 		if (!stop)
 			mX += 1;
 		Draw();
-		if (mX == 0) {
+		if (mX == 4) {
 			gotoXY(mX, mY);
 			cout << " " << endl;
 			gotoXY(mX + 1, mY);
