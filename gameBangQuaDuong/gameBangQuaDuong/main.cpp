@@ -61,37 +61,9 @@ void ThreadFunc1() {
 			count -= 1;
 			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
 				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
-				IS_RUNNING = false;
 				IS_LOSE = true;
 				printMenuAfterDead();
-				int temp;
-				temp = _getch();
-				switch (temp)
-				{
-				case 49:
-				{
-					newGAME.resetGame();
-					count = 0;
-					IS_RUNNING = true;
-					IS_LOSE = false;
-					menuScreen(temp);
-					break;
-				}
-				case 50:
-				{
-					cout << "Load Game";
-					break;
-				}
-				case 51:
-				{
-					menuScreen(52);
-					break;
-				}
-				default:
-				{
-					break;
-				}
-				}
+				menuScreen(1);
 			}
 			if (newGAME.getPeople().isFinish())
 			{
@@ -105,7 +77,7 @@ void ThreadFunc1() {
 
 void menuScreen(int option)
 {
-	while (option != 52 && !IS_LOSE)
+	while (option != 52)
 	{
 		switch (option)
 		{
@@ -134,8 +106,31 @@ void menuScreen(int option)
 					}
 					case 49:
 					{
-						t1.join();
-						menuScreen(KEY);
+						if (IS_LOSE)
+						{
+							newGAME.resetGame();
+							IS_RUNNING = true;
+							menuScreen(49);
+							break;
+						}
+						else
+						{
+							t1.join();
+							menuScreen(KEY);
+							break;
+						}
+					}
+					case 50:
+					{
+						if (IS_LOSE)
+						{
+							cout << "Load Game";
+							break;
+						}
+					}
+					case 51:
+					{
+						menuScreen(52);
 						break;
 					}
 					default:
