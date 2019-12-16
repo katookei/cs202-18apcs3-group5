@@ -2,6 +2,7 @@
 using namespace std;
 
 bool IS_RUNNING = true;
+
 int KEY = NULL;
 CGAME newGAME;
 
@@ -19,17 +20,35 @@ void ThreadFunc1() {
 				KEY = NULL;
 			}
 			newGAME.updatePosVehicle();
+			newGAME.updatePosAnimal();
 			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
 				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
 				IS_RUNNING = false;
                 system("cls");
 			    PrintMenu();
-                system("cls");
-		    	PrintMenu();
+              
 			}
-		
 		}
 		Sleep(25);
+	}
+}
+
+void ThreadFunc2()
+{
+	while (IS_RUNNING)
+	{
+		for (int i = 0; i < newGAME.getAnimal().size(); i++)
+		{
+
+			newGAME.getAnimal()[i]->updateStatus();
+			Sleep(2000);
+		}
+		/*for (int i = 0; i < newGAME.getVehicle().size(); i++)
+		{
+			newGAME.getVehicle()[i]->getStatus(yes);
+			Sleep(2000);
+			newGAME.getVehicle()[i]->getStatus(no);
+		}*/
 	}
 }
 
@@ -46,6 +65,7 @@ void menuScreen(int option)
 			system("cls");
 			newGAME.startGame();
 			thread t1(ThreadFunc1);
+			thread t2(ThreadFunc2);
 			fixConsoleWindow();
 			while (1)
 			{

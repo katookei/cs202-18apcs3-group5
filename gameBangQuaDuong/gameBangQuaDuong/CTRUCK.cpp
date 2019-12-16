@@ -1,5 +1,7 @@
 #include "CTRUCK.h"
 
+bool CTRUCK::stop;
+
 void CTRUCK::Move() {
 	gotoXY(mX, mY);
 	cout << " " << endl;
@@ -27,24 +29,28 @@ CTRUCK::CTRUCK() {
 	mX = 3;
 	mY = 15;
 	beginSide = "Left";
+	stop = false;
 }
 
 CTRUCK::CTRUCK(int x, int y, string side) {
 	mX = x;
 	mY = y;
 	beginSide = side;
+	stop = false;
 }
 
 CTRUCK::CTRUCK(string side) {
 	mX =  3;
 	mY = 25;
 	beginSide = side;
+	stop = false;
 }
 
 CTRUCK::CTRUCK(int x, int y) {
 	mX = x;
 	mY = y;
 	beginSide = "Left";
+	stop = false;
 }
 
 void CTRUCK::Draw() {
@@ -63,3 +69,8 @@ void CTRUCK::Draw() {
 }
 
 
+
+void CTRUCK::getStatus()
+{
+		stop = false;
+}

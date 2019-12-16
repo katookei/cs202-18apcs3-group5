@@ -1,5 +1,8 @@
 #include "CCAR.h"
 
+bool CCAR::stop;
+
+
 void CCAR::draw()
 {
 	gotoXY(mX, mY);
@@ -12,11 +15,14 @@ void CCAR::draw()
 CCAR::CCAR() {
 	mX = 0;
 	mY = 25;
+	stop = false;
 }
 
 CCAR::CCAR(int a, int b) {
 	mX = a;
 	mY = b;
+	beginSide = "Left";
+	stop = false;
 }
 
 CCAR::CCAR(int a, int b, string c)
@@ -24,6 +30,7 @@ CCAR::CCAR(int a, int b, string c)
 	mX = a;
 	mY = b;
 	beginSide = c;
+	stop = false;
 }
 void CCAR::Move()
 {
@@ -35,6 +42,7 @@ void CCAR::Move()
 	cout << " ";
 	if (beginSide == "Left")
 	{
+		if (stop == false)
 		mX++;
 		draw();
 		if (mX + 2 == 114)
@@ -50,6 +58,7 @@ void CCAR::Move()
 	}
 	if (beginSide == "Right")
 	{
+		if (stop == false)
 		mX--;
 		draw();
 		if (mX ==0)
@@ -66,4 +75,11 @@ void CCAR::Move()
 	
 	
 	
+}
+
+
+void CCAR::getStatus()
+{
+
+		stop = false;
 }

@@ -1,5 +1,8 @@
 #include "CDINAUSOR.h"
 
+bool CDINAUSOR::stop;
+
+
 void CDINAUSOR::draw()
 {
 	if (beginSide == "Left")
@@ -36,11 +39,13 @@ void CDINAUSOR::Tell()
 CDINAUSOR::CDINAUSOR() {
 	mX = 0;
 	mY = 25;
+	stop = false;
 }
 
 CDINAUSOR::CDINAUSOR(int a, int b) {
 	mX = a;
 	mY = b;
+	stop = false;
 }
 
 CDINAUSOR::CDINAUSOR(int a, int b, string c)
@@ -48,6 +53,7 @@ CDINAUSOR::CDINAUSOR(int a, int b, string c)
 	mX = a;
 	mY = b;
 	beginSide = c;
+	stop = false;
 }
 void CDINAUSOR::Move(int,int)
 {
@@ -73,6 +79,7 @@ void CDINAUSOR::Move(int,int)
 		cout << " " << endl;
 		gotoXY(mX + 2, mY - 2);
 		cout << " " << endl;
+		if (stop == false)
 		++mX;
 		draw();
 		if (mX + 2 == 114)
@@ -102,6 +109,7 @@ void CDINAUSOR::Move(int,int)
 		cout << " " << endl;
 		gotoXY(mX - 2, mY - 2);
 		cout << " " << endl;
+		if (stop == false)
 		--mX;
 		draw();
 		if (mX - 2 == 0)
@@ -123,3 +131,9 @@ void CDINAUSOR::Move(int,int)
 
 
 }
+
+void CDINAUSOR::updateStatus()
+{
+	stop = !stop;
+}
+

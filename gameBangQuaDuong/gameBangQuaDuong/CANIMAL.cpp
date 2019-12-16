@@ -8,3 +8,4 @@ int CANIMAL::getMX() {
 int CANIMAL::getMY() {
 	return mY;
 }
+

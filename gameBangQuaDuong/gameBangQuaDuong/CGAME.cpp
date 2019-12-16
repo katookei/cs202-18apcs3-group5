@@ -1,16 +1,33 @@
 #include "CGAME.h"
 
 CGAME::CGAME() {
-	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
+	/*CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
 	CANIMAL* tem1, * tem2, * tem3, * tem4;
 	
-	/*tem1 = new CDINAUSOR(100, 5, "Right");
-	tem2= new CDINAUSOR(3, 10, "Left");*/
-	temp5 = new CCAR(3, 23, "Right");
-	temp6 = new CTRUCK(13, 15, "Left");
-	temp7 = new CTRUCK(12, 23, "Left");
-	temp8 = new CTRUCK(20, 16, "Left");
-	temp9 = new CTRUCK(18, 13, "Left");
+	int i, k, m, l;
+	i = 0 + rand() % 4;
+	
+	k = 0 + rand() % 4;
+
+	if (k - i == 0)
+	{
+		k = 1 + rand() % 4;
+	}
+	m = 1 + rand() % 3;
+	if (m - k == 0 || m - i == 0)
+	{
+		m = 1 + rand() % 4;
+	}
+	l = 1 + rand() % 4;
+	if (l-i==0 || l-m==0 || l-k==0)
+	{
+		l = 1 + rand() % 4;
+	}	
+	temp5 = new CCAR(3, 4+i*6 + (1 + rand() % 5), "Right");
+	temp6 = new CCAR(13, 4 + i * 6 + (1 + rand() % 5), "Left");
+	temp7 = new CTRUCK(12, 4 + k * 6 + (1 + rand() % 5), "Left");
+	temp8 = new CTRUCK(20, 4 + k * 6 + (1 + rand() % 5), "Left");
+	temp9 = new CTRUCK(18, 4 + k * 6 + (1 + rand() % 5), "Left");
 	
 
 	
@@ -20,15 +37,29 @@ CGAME::CGAME() {
 	vehicles.push_back(temp8);
 	vehicles.push_back(temp9);
 
-	tem1 = new CBIRD(6, 7);
-	tem2 = new CBIRD(8, 20);
-	tem3 = new CDINAUSOR(5, 10,"Left");
-	tem4 = new CDINAUSOR(100, 7,"Right");
+	tem1 = new CBIRD(6, 4 + m * 6 + (1 + rand() % 5));
+	tem2 = new CBIRD(8, 4 + m * 6 + (1 + rand() % 5));
+	tem3 = new CDINAUSOR(5, 4 + l * 6 + (3 + rand() % 3),"Left");
+	tem4 = new CDINAUSOR(100, 4 + l * 6 + (3 + rand() % 3),"Right");
 
 	animals.push_back(tem1);
 	animals.push_back(tem2);
 	animals.push_back(tem3);
-	animals.push_back(tem4);
+	animals.push_back(tem4);*/
+	CVEHICLE* xe1,* xe2;
+	CANIMAL* con1, * con2;
+	con1 = new CBIRD(4,5);
+
+	con2 = new CDINAUSOR(4,14);
+
+	xe1 = new CCAR(19,20);
+
+	xe2 = new CTRUCK(4,25);
+
+	animals.push_back(con1);
+	animals.push_back(con2);
+	vehicles.push_back(xe1);
+	vehicles.push_back(xe2);
 }
 
 void CGAME::updatePosPeople(int mov) {
@@ -286,14 +317,3 @@ bool CGAME::getIsPaused() {
 	return isGamePaused;
 }
 
-void PrintMenu()
-{
-	gotoXY(50, 10);
-	cout << "1. Start game";
-	gotoXY(50, 11);
-	cout << "2. Save game";
-	gotoXY(50, 12);
-	cout << "3. Load game";
-	gotoXY(50, 13);
-	cout << "4. Exit game";
-}

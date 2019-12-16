@@ -32,6 +32,7 @@ public:
 	 bool getIsPaused();
 	 void printPauseGameMenu();
 	 void erasePasueGameMenu();
+
 };
 
 void PrintMenu();
