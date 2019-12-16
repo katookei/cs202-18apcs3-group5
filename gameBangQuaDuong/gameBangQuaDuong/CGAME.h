@@ -40,6 +40,7 @@ public:
 	 void level2Init();
 	 void level3Init();
 	 void level4Init();
+	 void level5Init();
 	 void win();
 };
 

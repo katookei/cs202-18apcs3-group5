@@ -61,7 +61,7 @@ void CCAR::Move()
 		if (stop == false)
 		mX--;
 		draw();
-		if (mX ==0)
+		if (mX == 4)
 		{
 			gotoXY(mX, mY);
 			cout << " ";
