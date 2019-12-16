@@ -71,3 +71,13 @@ int CPEOPLE::getY()
 {
 	return mY;
 }
+
+void CPEOPLE::setX(int x)
+{
+	mX = x;
+}
+
+void CPEOPLE::setY(int y)
+{
+	mY = y;
+}

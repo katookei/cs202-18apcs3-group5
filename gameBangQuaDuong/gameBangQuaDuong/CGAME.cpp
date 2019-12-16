@@ -1,28 +1,37 @@
 #include "CGAME.h"
 
-CGAME::CGAME(int n) 
+CGAME::CGAME() 
 {
-	CVEHICLE** Vehicles[5];
-	CANIMAL** Animals[5];
-	for (int i = 0; i < 5; ++i)
+	CVEHICLE** Cars[4];
+	for (int i = 0; i < 4; ++i)
 	{
-		Vehicles[i] = new  CVEHICLE * [n * 6];
-		Animals[i] = new  CANIMAL * [n * 6];
+		Cars[i] = new CVEHICLE * [4];
 	}
-	for (int i = 0; i < 5; ++i)
-		for (int j = 0; j < n * 3; ++j)
-		{
-			Vehicles[i][j] = new CCAR(i * 5,TOP + j*2+1, "Left");
-			Vehicles[i][j + n * 3] = new CTRUCK(i * 5,TOP + (j+n*3)*2+1, "Left");
-			Animals[i][j] = new CBIRD(i * 5,TOP + j*2, "Right");
-			Animals[i][j + n * 3] = new CDINAUSOR(i * 5,TOP + (j+n*3)*2, "Right");
-		}
-	for (int i = 0; i < 5; ++i)
-		for (int j = 0; j < n * 6; ++j)
-		{
-			vehicles.push_back(Vehicles[i][j]);
-			animals.push_back(Animals[i][j]);
-		}
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+			Cars[i][j] = new CCAR(LEFT + i * 4, TOP + i * 2 + 1,"Left");
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+			vehicles.push_back(Cars[i][j]);
+	}
+	CVEHICLE** Trucks[4];
+	for (int i = 0; i < 4; ++i)
+	{
+		Trucks[i] = new CVEHICLE * [4];
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+			Trucks[i][j] = new CTRUCK(LEFT + i * 4, TOP + i * 4 + 1, "Left");
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+			vehicles.push_back(Trucks[i][j]);
+	}
 }
 
 void CGAME::updatePosPeople(int mov) {
@@ -298,4 +307,34 @@ bool CGAME::isFinish()
 		return true;
 	else
 		return false;
+}
+
+void CGAME::initialForStage(int n)
+{
+
+}
+
+void CGAME::light()
+{
+	gotoXY(115, 32);
+	HANDLE hConsoleColor;
+	hConsoleColor = GetStdHandle(STD_OUTPUT_HANDLE);
+	while (1)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 1; j < 5; j++)
+			{
+				SetConsoleTextAttribute(hConsoleColor, lightcolor[i]);
+				gotoXY(115, 2 + j * 6);
+				cout << char(219);
+				SetConsoleTextAttribute(hConsoleColor, 15);
+				gotoXY(115, 3 + j * 6);
+				cout << char(219) << endl;
+				gotoXY(115, 4 + j * 6);
+				cout << char(223) << endl;
+			}
+			Sleep(2000);
+		}
+	}
 }

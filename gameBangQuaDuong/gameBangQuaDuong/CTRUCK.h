@@ -5,6 +5,7 @@ class CTRUCK : public CVEHICLE
 {
 	string beginSide;
 public:
+	static bool IS_STOP;
 	void Move();
 	void Draw();
 	CTRUCK();

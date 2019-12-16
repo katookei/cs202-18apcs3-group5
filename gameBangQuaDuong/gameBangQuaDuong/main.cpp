@@ -3,7 +3,8 @@ using namespace std;
 
 bool IS_RUNNING = true;
 int KEY = NULL;
-CGAME newGAME(1);
+CGAME newGAME;
+mutex g_i_mutex;
 
 void exitGame(thread *t1) {
 	system("cls");
@@ -29,10 +30,19 @@ void ThreadFunc1() {
 			if (newGAME.isFinish())
 			{
 				IS_RUNNING = false;
+				++newGAME.lvl;
+				newGAME.getPeople().setX(60);
+				newGAME.getPeople().setY(2);
+				IS_RUNNING = true;
 			}
 		}
 		Sleep(25);
 	}
+}
+
+void ThreadFunc2() {
+	const lock_guard<mutex> lock(g_i_mutex);
+	newGAME.light();
 }
 
 void menuScreen(int option)
@@ -48,6 +58,7 @@ void menuScreen(int option)
 			system("cls");
 			newGAME.startGame();
 			thread t1(ThreadFunc1);
+			thread t2(ThreadFunc2);
 			fixConsoleWindow();
 			while (1)
 			{

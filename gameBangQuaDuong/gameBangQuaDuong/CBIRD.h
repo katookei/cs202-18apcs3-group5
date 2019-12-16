@@ -8,6 +8,7 @@ class CBIRD :
 {
 	string beginSide;
 public:
+	static bool IS_STOP;
 	void Move(int x, int y);
 	void Tell();
 	void Draw();

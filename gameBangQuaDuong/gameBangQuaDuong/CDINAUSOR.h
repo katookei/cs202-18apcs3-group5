@@ -5,6 +5,7 @@ class CDINAUSOR :
 {
 	string beginSide;
 public:
+	static bool IS_STOP;
 	CDINAUSOR();
 	CDINAUSOR(int, int);
 	CDINAUSOR(int, int, string);
