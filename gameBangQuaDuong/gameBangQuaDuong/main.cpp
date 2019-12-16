@@ -164,7 +164,7 @@ void menuScreen(int option)
 					}
 					case 51:
 					{
-						menuScreen(52);
+						exitGame(&t1);
 						break;
 					}
 					default:

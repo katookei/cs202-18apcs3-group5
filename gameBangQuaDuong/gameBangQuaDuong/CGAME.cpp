@@ -198,6 +198,10 @@ void CGAME::printPauseGameMenu() {
 			saveGame();
 			break;
 		}
+		case 81: {
+			exit(0);
+			break;
+		}
 		default:
 			break;
 		}
@@ -379,26 +383,26 @@ void CGAME::level3Init()
 	CVEHICLE* Trucks[5];
 	for (int i = 0; i < 5; ++i)
 	{
-		Cars[i] = new CCAR(5 + i * 7, LINE3 + 2, "Left");
+		Cars[i] = new CCAR(5 + i * 7, LINE2 + 2, "Left");
 		vehicles.push_back(Cars[i]);
 	}
 	for (int i = 0; i < 5; ++i)
 	{
-		Trucks[i] = new CTRUCK(5 + i * 7, LINE3 - 2, "Left");
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE1 - 2, "Left");
 		vehicles.push_back(Trucks[i]);
 	}
 #pragma endregion
 
 #pragma region ANIMAL
-	CANIMAL* temp2 = new CBIRD(5, LINE1, "Left");
-	CANIMAL* temp3 = new CDINAUSOR(5, LINE2, "Left");
-	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE2, "Right");
-	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE1, "Right");
+	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
+	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
+	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE3, "Right");
+	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE4, "Right");
 	CANIMAL* Birds[5];
 	CANIMAL* Dinausors[5];
 	for (int i = 0; i < 5; ++i)
 	{
-		Birds[i] = new CBIRD(5 +  i * 7, LINE4 - 2 , "Left");
+		Birds[i] = new CBIRD(5 +  i * 7, LINE3 - 2 , "Left");
 		animals.push_back(Birds[i]);
 	}
 	for (int i = 0; i < 5; ++i)
@@ -427,9 +431,9 @@ void CGAME::level5Init()
 	CVEHICLE* Trucks[15];
 	for (int i = 0; i < 5; ++i)
 	{
-		Cars[i] = new CCAR(5 + i * 7, LINE3 + 2, "Left");
+		Cars[i] = new CCAR(5 + i * 7, LINE2 + 2, "Left");
 		vehicles.push_back(Cars[i]);
-		Cars[i + 5] = new CCAR(5 + i * 7, LINE1 - 2, "Left");
+		Cars[i + 5] = new CCAR(5 + i * 7, LINE2 - 2, "Left");
 		vehicles.push_back(Cars[i + 5]);
 		Cars[i + 10] = new CCAR((LEFT + RIGHT) / 3 + i * 7, LINE1, "Left");
 		vehicles.push_back(Cars[i + 10]);
@@ -479,14 +483,14 @@ void CGAME::level4Init()
 	CVEHICLE* Trucks[10];
 	for (int i = 0; i < 5; ++i)
 	{
-		Cars[i] = new CCAR(5 + i * 7, LINE3 + 2, "Left");
+		Cars[i] = new CCAR(5 + i * 7, LINE2 + 2, "Left");
 		vehicles.push_back(Cars[i]);
-		Cars[i + 5] = new CCAR(5 + i * 7, LINE1 - 2, "Left");
+		Cars[i + 5] = new CCAR(5 + i * 7, LINE2 - 2, "Left");
 		vehicles.push_back(Cars[i + 5]);
 	}
 	for (int i = 0; i < 5; ++i)
 	{
-		Trucks[i] = new CTRUCK(5 + i * 7, LINE3 - 2, "Left");
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE1 - 2, "Left");
 		vehicles.push_back(Trucks[i]);
 		Trucks[i + 5] = new CTRUCK(RIGHT - 3, LINE1 + 2, "Right");
 		vehicles.push_back(Trucks[i+5]);
@@ -607,7 +611,35 @@ void CGAME::loadGame() {
 		fin.open(temp + ".txt");
 	}
 	fin >> lvl;
-	level2Init();
+	switch (lvl)
+	{
+	case 2:
+	{
+		level2Init();
+		break;
+	}
+	case 3:
+	{
+		level3Init();
+		break;
+	}
+	case 4:
+	{
+		level4Init();
+		break;
+	}
+	case 5:
+	{
+		level5Init();
+		break;
+	}
+	case 6:
+	{
+		//	win();
+		break;
+	}
+	}
+
 }
 
 
