@@ -141,6 +141,11 @@ vector<CANIMAL*>& CGAME::getAnimal() {
 	return animals;
 }
 
+vector<light>& CGAME::getlight()
+{
+	return trafficlight;
+}
+
 void CGAME::pauseGame() {
 	isGamePaused = true;
 	printPauseGameMenu();
@@ -318,18 +323,80 @@ void CGAME::level2Init() {
 	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
 	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
 	CVEHICLE* temp4 = new CTRUCK(RIGHT - 7, LINE1, "Left");
+	CVEHICLE* temp8 = new CTRUCK(RIGHT - 10, LINE1, "Left");
 	CVEHICLE* temp5 = new CCAR(RIGHT - 7, LINE2, "Left");
+	CVEHICLE* temp9 = new CCAR(RIGHT - 10, LINE2, "Left");
 	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE3, "Left");
 	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE4, "Left");
 	vehicles.push_back(temp);
 	vehicles.push_back(temp1);
 	vehicles.push_back(temp4);
 	vehicles.push_back(temp5);
+	vehicles.push_back(temp9);
+	vehicles.push_back(temp8);
 	animals.push_back(temp2);
 	animals.push_back(temp3);
 	animals.push_back(temp6);
 	animals.push_back(temp7);
 }
+
+
+light::light()
+{
+}
+
+light::~light()
+{
+}
+
+light::light(int x, int y, int a, int b)
+{
+	mX = x;
+	mY = y;
+	color = a;
+	object = b;
+}
+void light::changecolor()
+{
+	color = !color;
+}
+
+void light :: draw()
+{
+	HANDLE hConsoleColor;
+	hConsoleColor = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsoleColor, lightcolor[color]);
+	gotoXY(mX,mY);
+	cout << char(219);
+	SetConsoleTextAttribute(hConsoleColor, 15);
+	gotoXY(mX,mY+1);
+	cout << char(219) << endl;
+	gotoXY(mX,mY+2);
+	cout << char(223) << endl;
+}
+
+int light::getcolor()
+{
+	return color;
+}
+
+void CGAME::setlight()
+{
+	light a(115, 8, 1, 0);
+	light b(115, 14, 1, 1);
+	light c(115, 20, 0, 2);
+	light d(115, 26, 0, 3);
+	trafficlight.push_back(a);
+	trafficlight.push_back(b);
+	trafficlight.push_back(c);
+	trafficlight.push_back(d);
+}
+
+int light::getobject()
+{
+	return object;
+}
+
 
 void CGAME::saveGame() {
 	string temp;

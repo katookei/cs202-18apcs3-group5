@@ -6,12 +6,29 @@
 #include"CDINAUSOR.h"
 #include"CPEOPLE.h"
 
+class light
+{
+private:
+	int mX, mY;
+	int color = 0;
+	int object;
+public:
+	light();
+	light(int, int, int, int);
+	int lightcolor[2] = { 12,10 };
+	void changecolor();
+	void draw();
+	int getcolor();
+	int getobject();
+	~light();
+};
 
 class CGAME
 {
 	bool isGamePaused = false;
 	vector<CVEHICLE*> vehicles;
 	vector<CANIMAL*> animals;
+	vector<light> trafficlight;
 	CPEOPLE cn;
 public:
 	int lvl = 1;
@@ -21,6 +38,7 @@ public:
 	 CPEOPLE getPeople();//Lấy thông tin người
 	 vector<CVEHICLE*>& getVehicle();//Lấy danh sách các xe
 	 vector<CANIMAL*>& getAnimal(); //Lấy danh sách các thú
+	 vector<light>& getlight();
 	 void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
 	 void exitGame(); // Thực hiện thoát Thread
 	 void startGame(); // Thực hiện bắt đầu vào trò chơi
@@ -40,8 +58,12 @@ public:
 	 void level3Init();
 	 void level4Init();
 	 void win();
+	 void setlight();
 };
 
 void PrintMenu();
 void printMenuAfterDead();
+
+
+
 

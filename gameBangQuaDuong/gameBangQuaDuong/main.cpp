@@ -20,10 +20,8 @@ void exitGame(thread *t1) {
 void ThreadFunc1() {
 	HANDLE hConsoleColor;
 	hConsoleColor = GetStdHandle(STD_OUTPUT_HANDLE);
-	int lightcolor[2] = { 12,10 };
-	int light = 1;
 	int count = 0;
-	int type = 0;
+	newGAME.setlight();
 	while (IS_RUNNING) {
 		if (!newGAME.getIsPaused()) {
 			gotoXY(2, 3);
@@ -36,31 +34,62 @@ void ThreadFunc1() {
 			}
 			newGAME.updatePosVehicle();
 			newGAME.updatePosAnimal();
+			
+			
+			if (count == 50)
+			{
+				newGAME.getlight()[2].changecolor();
+				newGAME.getlight()[3].changecolor();
+				newGAME.getlight()[0].changecolor();
+				 for(int i = 0;i < newGAME.getlight().size();i++)
+				{
+				newGAME.getlight()[i].draw();// xanh 10 do 12
+				}
+				 for (int i = 0;i < newGAME.getVehicle().size();i++)
+				 {
+					 if (newGAME.getVehicle()[i]->getType() == newGAME.getlight()[0].getobject())
+					 {
+						 newGAME.getVehicle()[i]->updateStatus();
+						 break;
+					 }
+				 } 
+				
+			}
+
 			if (count == 0)
-			{  
-				light = !light;
-				for (int i = 0; i < newGAME.getVehicle().size(); i++)
+			{
+				newGAME.getlight()[1].changecolor();
+				/*newGAME.getlight()[0].changecolor();*/
+				newGAME.getlight()[2].changecolor();
+				newGAME.getlight()[3].changecolor();
+				for (int i = 0;i < newGAME.getlight().size();i++)
 				{
-					if (type != newGAME.getVehicle()[i]->getType()) {
-						type = newGAME.getVehicle()[i]->getType();
+					newGAME.getlight()[i].draw();
+				}
+				for (int i = 0;i < newGAME.getVehicle().size();i++)
+				{
+					if (newGAME.getVehicle()[i]->getType() == newGAME.getlight()[1].getobject())
+					{
 						newGAME.getVehicle()[i]->updateStatus();
+						break;
 					}
+					/*if(newGAME.getVehicle()[i]->getType() == newGAME.getlight()[0].getobject())
+					{
+						newGAME.getVehicle()[i]->updateStatus();
+					}*/
 				}
-			    
-				for (int j = 1; j < 5; j++)
-				{
-					SetConsoleTextAttribute(hConsoleColor, lightcolor[light]);
-					gotoXY(115, 2 + j * 6);
-					cout << char(219);
-					SetConsoleTextAttribute(hConsoleColor, 15);
-					gotoXY(115, 3 + j * 6);
-					cout << char(219) << endl;
-					gotoXY(115, 4 + j * 6);
-					cout << char(223) << endl;
-				}
+				
 				count = 100;
 			}
-			count -= 1;
+			--count;
+			/*for (int i = 0; i < newGAME.getVehicle().size(); i++)
+			{
+				if (type != newGAME.getVehicle()[i]->getType()) {
+					type = newGAME.getVehicle()[i]->getType();
+					cout << type;
+					newGAME.getVehicle()[i]->updateStatus();
+				}
+			}*/
 			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
 				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
 				IS_LOSE = true;

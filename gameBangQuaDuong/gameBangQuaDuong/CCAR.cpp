@@ -89,6 +89,7 @@ bool CCAR::isTouched(int x, int y) {
 	return false;
 }
 
-int CCAR::getType() {
-	return 2;
+int CCAR::getType() 
+{
+	return type;
 }

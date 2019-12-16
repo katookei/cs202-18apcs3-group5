@@ -85,5 +85,5 @@ bool CBIRD::isTouched(int x, int y) {
 }
 
 int CBIRD::getType() {
-	return 1;
+	return type;
 }
