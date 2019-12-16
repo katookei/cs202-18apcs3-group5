@@ -43,4 +43,5 @@ public:
 };
 
 void PrintMenu();
+void printMenuAfterDead();
 
