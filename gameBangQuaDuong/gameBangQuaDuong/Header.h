@@ -6,6 +6,8 @@
 #include<string>
 #include<vector>
 #include<mutex>
+#include<fstream>
+#pragma comment(lib, "winmm.lib")
 #define TOP 4
 #define BOTTOM 28
 #define LEFT 2

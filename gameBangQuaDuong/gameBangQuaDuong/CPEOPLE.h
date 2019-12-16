@@ -7,6 +7,7 @@ class CPEOPLE {
 	bool mState; //Trạng thái sống chết
 public:
 	CPEOPLE();
+	CPEOPLE(int, int);
 	void Up(int);
 	void Left(int);
 	void Right(int);
@@ -20,4 +21,5 @@ public:
 	void setX(int);
 	void setY(int);
 	void resetPoṣ̣();
+	void draw();
 };

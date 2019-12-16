@@ -22,10 +22,10 @@ public:
 	 vector<CVEHICLE*>& getVehicle();//Lấy danh sách các xe
 	 vector<CANIMAL*>& getAnimal(); //Lấy danh sách các thú
 	 void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
-	 void exitGame(HANDLE); // Thực hiện thoát Thread
+	 void exitGame(); // Thực hiện thoát Thread
 	 void startGame(); // Thực hiện bắt đầu vào trò chơi
-	 void loadGame(istream); // Thực hiện tải lại trò chơi đã lưu
-	 void saveGame(istream); // Thực hiện lưu lại dữ liệu trò chơi
+	 void loadGame(); // Thực hiện tải lại trò chơi đã lưu
+	 void saveGame(); // Thực hiện lưu lại dữ liệu trò chơi
 	 void pauseGame(); // Tạm dừng Thread
 	 void resumeGame(); //Quay lai Thread
 	 void updatePosPeople(int); //Thực hiện điều khiển di chuyển của CPEOPLE
@@ -35,7 +35,6 @@ public:
 	 void printPauseGameMenu();
 	 void erasePasueGameMenu();
 	 void levelUp();
-	 void initialForStage(int);
 	 void level1Init();
 	 void level2Init();
 	 void level3Init();

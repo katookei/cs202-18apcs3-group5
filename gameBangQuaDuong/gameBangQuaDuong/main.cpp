@@ -26,6 +26,8 @@ void ThreadFunc1() {
 		if (!newGAME.getIsPaused()) {
 			gotoXY(2, 3);
 			cout << "level " << newGAME.lvl;
+			gotoXY(RIGHT - 20, 3);
+			cout << "Press <ESC> to pause game";
 			if (KEY != NULL) {
 				newGAME.updatePosPeople(KEY);
 				KEY = NULL;
@@ -61,6 +63,7 @@ void ThreadFunc1() {
 			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
 				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
 				IS_RUNNING = false;
+				newGAME.getPeople().isDead();
 				newGAME.resetGame();
 				count = 0;
 				IS_RUNNING = true;
@@ -80,6 +83,7 @@ void menuScreen(int option)
 
 	while (option != 52)
 	{
+		int flag = true;
 		switch (option)
 		{
 		case 49:
@@ -87,9 +91,8 @@ void menuScreen(int option)
 			gotoXY(60, 3);
 			IS_RUNNING = true;
 			system("cls");
-			newGAME.startGame();
+			newGAME.drawGame();
 			thread t1(ThreadFunc1);
-			
 			fixConsoleWindow();
 			while (1)
 			{
@@ -118,12 +121,42 @@ void menuScreen(int option)
 		}
 		case 50:
 		{
-			cout << "Pending";
+			newGAME.loadGame();
+			gotoXY(60, 3);
+			IS_RUNNING = true;
+			system("cls");
+			newGAME.drawGame();
+			thread t1(ThreadFunc1);
+			fixConsoleWindow();
+			while (1)
+			{
+				int temp = toupper(_getch());
+				KEY = temp;
+				switch (KEY)
+				{
+				case 27: {
+					newGAME.pauseGame();
+					break;
+				}
+				case 52:
+				{
+					exitGame(&t1);
+					return;
+				}
+				case 49:
+				{
+					t1.join();
+					menuScreen(KEY);
+					break;
+				}
+				}
+			}
 			break;
 		}
 		case 51:
 		{
-			cout << "Pending";
+			//newGAME.exitGame();
+			flag = false;
 			break;
 		}
 		default:
@@ -132,6 +165,7 @@ void menuScreen(int option)
 			break;
 		}
 		}
+		if (!flag) break;
 	}
 }
 

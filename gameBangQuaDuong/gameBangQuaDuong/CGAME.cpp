@@ -119,6 +119,7 @@ CGAME::~CGAME() {
 void CGAME::startGame() 
 {
 	drawGame();
+	cn.draw();
 }
 
 CPEOPLE CGAME::getPeople() {
@@ -176,15 +177,20 @@ void CGAME::printPauseGameMenu() {
 	cout << "Quit game(Q)" << endl;
 	while (1) {
 		bool pauseFlag = true;
-		char temp = toupper(_getch());
+		int temp = toupper(_getch());
 		gotoXY(50, 14);
 		cout << "You pressed: " << temp;
 		switch (temp)
 		{
-		case 13: {
+		case 82: {
 			pauseFlag = false;
 			erasePasueGameMenu();
 			resumeGame();
+			break;
+		}
+		case 83: {
+			pauseFlag = false;
+			saveGame();
 			break;
 		}
 		default:
@@ -256,16 +262,15 @@ void CGAME::drawGame()
 	}
 }
 
+
 void PrintMenu()
 {
 	gotoXY(50, 10);
 	cout << "1. Start game";
 	gotoXY(50, 11);
-	cout << "2. Save game";
+	cout << "2. Load game";
 	gotoXY(50, 12);
-	cout << "3. Load game";
-	gotoXY(50, 13);
-	cout << "4. Exit game";
+	cout << "3. Exit game";
 }
 
 bool CGAME::getIsPaused() {
@@ -290,8 +295,8 @@ void CGAME::resetGame()
 	cn.resetPoṣ̣();
 }
 
-
 void CGAME::level1Init() {
+	cn.draw();
 	vehicles.clear();
 	animals.clear();
 	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
@@ -305,6 +310,7 @@ void CGAME::level1Init() {
 }
 
 void CGAME::level2Init() {
+	cn.draw();
 	vehicles.clear();
 	animals.clear();
 	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
@@ -318,9 +324,51 @@ void CGAME::level2Init() {
 	vehicles.push_back(temp);
 	vehicles.push_back(temp1);
 	vehicles.push_back(temp4);
-	/*vehicles.push_back(temp5);*/
+	vehicles.push_back(temp5);
 	animals.push_back(temp2);
 	animals.push_back(temp3);
 	animals.push_back(temp6);
 	animals.push_back(temp7);
 }
+
+void CGAME::saveGame() {
+	string temp;
+	ofstream fout;
+	gotoXY(50, 14);
+	cout << "input save name:";
+	cin >> temp;
+	fout.open(temp + ".txt", ios::trunc);
+	fout << lvl;
+	gotoXY(50, 20);
+	cout << "Game saved!" << endl;
+	Sleep(1000);
+	system("cls");
+	drawGame();
+	cn.draw();
+	resumeGame();
+
+}
+
+
+void CGAME::loadGame() {
+    string temp;
+    ifstream fin;
+    gotoXY(50, 14);
+    cout << "input load name:";
+    cin >> temp;
+    fin.open(temp + ".txt");
+	while (!fin.is_open()) {
+		gotoXY(50, 14);
+		cout << "                                                                                                  " << endl;
+		gotoXY(50, 14);
+		cout << "No file with inputed name, please input again:" << endl;
+		gotoXY(96, 14);
+		cin >> temp;
+		fin.open(temp + ".txt");
+	}
+	fin >> lvl;
+	level2Init();
+}
+
+
+
