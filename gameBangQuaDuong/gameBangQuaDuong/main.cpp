@@ -39,7 +39,7 @@ void ThreadFunc1() {
 				{
 					if (type != newGAME.getVehicle()[i]->getType()) {
 						type = newGAME.getVehicle()[i]->getType();
-						cout << type; 
+					
 						newGAME.getVehicle()[i]->updateStatus();
 					}
 				}

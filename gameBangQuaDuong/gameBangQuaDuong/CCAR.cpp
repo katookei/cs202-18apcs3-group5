@@ -5,11 +5,11 @@ bool CCAR::stop;
 void CCAR::draw()
 {
 	gotoXY(mX, mY);
-	cout << char(254);
+	cout << char(219);
 	gotoXY(mX + 1, mY);
-	cout << char(178) << endl;
+	cout << char(178);
 	gotoXY(mX + 2, mY);
-	cout << char(254) << endl;
+	cout << char(17);
 }
 CCAR::CCAR() {
 	mX = 0;

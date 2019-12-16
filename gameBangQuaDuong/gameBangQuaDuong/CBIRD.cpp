@@ -5,11 +5,11 @@ bool CBIRD::stop;
 void CBIRD::Draw()
 {
 	gotoXY(mX, mY);
-	cout << char(223);
+	cout << char(254);
 	gotoXY(mX + 1, mY);
-	cout << char(220);
+	cout << char(95);
 	gotoXY(mX + 2, mY);
-	cout << char(223);
+	cout << char(254);
 }
 void CBIRD::Move(int x, int y)
 {

@@ -11,10 +11,14 @@ void CTRUCK::Move() {
 		if (!stop)
 			mX += 1;
 		Draw();
-		if (mX == 114) {
+		if (mX == 112) {
 			gotoXY(mX, mY);
 			cout << " " << endl;
 			gotoXY(mX + 1, mY);
+			cout << " " << endl;
+			gotoXY(mX + 2, mY);
+			cout << " " << endl;
+			gotoXY(mX + 3, mY);
 			cout << " " << endl;
 			mX = 3;
 		}
@@ -64,15 +68,23 @@ CTRUCK::CTRUCK(int x, int y) {
 void CTRUCK::Draw() {
 	if (beginSide == "Left") {
 		gotoXY(mX, mY);
-		cout << char(178) << endl;
+		cout << char(219) << endl;
 		gotoXY(mX + 1, mY);
-		cout << char(254) << endl;
+		cout << char(16) << endl;
+		gotoXY(mX + 2, mY);
+		cout << char(219) << endl;
+		gotoXY(mX + 3, mY);
+		cout << char(175) << endl;
 	}
 	if (beginSide == "Right") {
 		gotoXY(mX, mY);
-		cout << char(254) << endl;
+		cout << char(219) << endl;
 		gotoXY(mX - 1, mY);
-		cout << char(178) << endl;
+		cout << char(16) << endl;
+		gotoXY(mX -2, mY);
+		cout << char(219) << endl;
+		gotoXY(mX - 3, mY);
+		cout << char(175) << endl;
 	}
 }
 
@@ -83,13 +95,13 @@ void CTRUCK::updateStatus()
 
 bool CTRUCK::isTouched(int x, int y) {
 	if (((mX == x && mY == y ) ||
-		(mX + 1 == x && mY == y)) && (beginSide == "Left"))
+		(mX + 1 == x && mY == y) || (mX +2  == x && mY == y) || (mX + 3== x && mY == y)) && (beginSide == "Left"))
 	{
 
 		return true;
 	}
 	if (((mX == x && mY == y) ||
-		(mX - 1 == x && mY == y)) && (beginSide == "Right"))
+		(mX - 1 == x && mY == y) || (mX - 2 == x && mY == y) || (mX - 3 == x && mY == y)) && (beginSide == "Right"))
 	{
 
 		return true;
