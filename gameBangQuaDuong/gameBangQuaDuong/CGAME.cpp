@@ -1,116 +1,102 @@
-#include "CGAME.h"
+﻿#include "CGAME.h"
 
-CGAME::CGAME() {
-	CVEHICLE* temp1,* temp2,* temp3,* temp4, * temp5, * temp6, * temp7, * temp8, * temp9;
-	CANIMAL* tem1, * tem2, * tem3, * tem4;
-	
-	/*tem1 = new CDINAUSOR(100, 5, "Right");
-	tem2= new CDINAUSOR(3, 10, "Left");*/
-	temp5 = new CCAR(3, 23, "Right");
-	temp6 = new CTRUCK(13, 15, "Left");
-	temp7 = new CTRUCK(12, 23, "Left");
-	temp8 = new CTRUCK(20, 16, "Left");
-	temp9 = new CTRUCK(18, 13, "Left");
-	
-
-	
-	vehicles.push_back(temp5);
-	vehicles.push_back(temp6);
-	vehicles.push_back(temp7);
-	vehicles.push_back(temp8);
-	vehicles.push_back(temp9);
-
-	tem1 = new CBIRD(6, 7);
-	tem2 = new CBIRD(8, 20);
-	tem3 = new CDINAUSOR(5, 10,"Left");
-	tem4 = new CDINAUSOR(100, 7,"Right");
-
-	animals.push_back(tem1);
-	animals.push_back(tem2);
-	animals.push_back(tem3);
-	animals.push_back(tem4);
+CGAME::CGAME() 
+{
+	level1Init();
 }
 
 void CGAME::updatePosPeople(int mov) {
 	switch (mov)
 	{
 	    case 80: {
-	    	cn.Down(1);
-			for (int i = 1; i < 4; ++i)
-				if (getPeople().getY() - 1 == 4 + i * 6)
+			if (getPeople().getY() < BOTTOM)
+			{
+				cn.Down(1);
+				for (int i = 1; i < TOP; ++i)
+					if (getPeople().getY() - 1 == TOP + i * 6)
+					{
+						gotoXY(getPeople().getX(), getPeople().getY() - 1);
+						cout << char(205);
+					}
+				if ((getPeople().getX() == LEFT || getPeople().getX() == RIGHT) && getPeople().getY() > TOP && getPeople().getY() < BOTTOM)
 				{
 					gotoXY(getPeople().getX(), getPeople().getY() - 1);
-					cout << char(205);
+					cout << char(179);
 				}
-			if ((getPeople().getX() == 2 || getPeople().getX() == 116) && getPeople().getY() > 4 && getPeople().getY() < 26)
-			{
-				gotoXY(getPeople().getX(), getPeople().getY() - 1);
-				cout << char(179);
-			}
-			if (getPeople().getY() - 1 == 4)
-			{
-				gotoXY(getPeople().getX(), getPeople().getY() - 1);
-				cout << char(196);
+				if (getPeople().getY() - 1 == TOP)
+				{
+					gotoXY(getPeople().getX(), getPeople().getY() - 1);
+					cout << char(196);
+				}
 			}
 	    	break;
 	    }
 	    case 72: {
-	    	cn.Up(1);
-			for (int i = 1; i < 4; ++i)
-				if (getPeople().getY() + 1 == 4 + i * 6)
+			if (getPeople().getY() > TOP)
+			{
+				cn.Up(1);
+				for (int i = 1; i < TOP; ++i)
+					if (getPeople().getY() + 1 == TOP + i * 6)
+					{
+						gotoXY(getPeople().getX(), getPeople().getY() + 1);
+						cout << char(205);
+					}
+				if ((getPeople().getX() == LEFT || getPeople().getX() == RIGHT) && getPeople().getY() > TOP && getPeople().getY() < BOTTOM)
 				{
 					gotoXY(getPeople().getX(), getPeople().getY() + 1);
-					cout << char(205);
+					cout << char(179);
 				}
-			if ((getPeople().getX() == 2 || getPeople().getX() == 116) && getPeople().getY() > 4 && getPeople().getY() < 26)
-			{
-				gotoXY(getPeople().getX(), getPeople().getY() + 1);
-				cout << char(179);
-			}
-			if (getPeople().getY() + 1 == 28)
-			{
-				gotoXY(getPeople().getX(), getPeople().getY() + 1);
-				cout << char(196);
+				if (getPeople().getY() + 1 == BOTTOM)
+				{
+					gotoXY(getPeople().getX(), getPeople().getY() + 1);
+					cout << char(196);
+				}
 			}
 	    	break;
 	    }
 	    case 75: {
-	    	cn.Left(1);
-			for (int i = 1; i < 4; ++i)
-				if (getPeople().getY() == 4 + i * 6)
+			if (getPeople().getX() > LEFT)
+			{
+				cn.Left(1);
+				for (int i = 1; i < TOP; ++i)
+					if (getPeople().getY() == TOP + i * 6)
+					{
+						gotoXY(getPeople().getX() + 1, getPeople().getY());
+						cout << char(205);
+					}
+				if ((getPeople().getY() == BOTTOM || getPeople().getY() == TOP) && getPeople().getX() > LEFT && getPeople().getX() < RIGHT)
 				{
 					gotoXY(getPeople().getX() + 1, getPeople().getY());
-					cout << char(205);
+					cout << char(196);
 				}
-			if ((getPeople().getY() == 28 || getPeople().getY() == 4) && getPeople().getX() > 2 && getPeople().getX() < 116)
-			{
-				gotoXY(getPeople().getX() + 1, getPeople().getY());
-				cout << char(196);
-			}
-			if (getPeople().getX() + 1 == 116 && getPeople().getX() > 2 && getPeople().getX() < 116)
-			{
-				gotoXY(getPeople().getX() + 1, getPeople().getY());
-				cout << char(179);
+				if (getPeople().getX() + 1 == RIGHT && getPeople().getX() > LEFT && getPeople().getX() < RIGHT)
+				{
+					gotoXY(getPeople().getX() + 1, getPeople().getY());
+					cout << char(179);
+				}
 			}
 	    	break;
 	    }
 	    case 77: {
+			if (getPeople().getX() < RIGHT)
+			{ 
 	    	cn.Right(1);
-			for (int i = 1; i < 4; ++i)
-				if (getPeople().getY() == 4 + i * 6)
+			for (int i = 1; i < TOP; ++i)
+				if (getPeople().getY() == TOP + i * 6)
 				{
 					gotoXY(getPeople().getX() - 1, getPeople().getY());
 					cout << char(205);
 				}
-			if ((getPeople().getY() == 28 || getPeople().getY() == 4) && getPeople().getX() > 2 && getPeople().getX() < 116)
+			if ((getPeople().getY() == BOTTOM || getPeople().getY() == TOP) && getPeople().getX() > 2 && getPeople().getX() < RIGHT)
 			{
 				gotoXY(getPeople().getX() - 1, getPeople().getY());
 				cout << char(196);
 			}
-			if (getPeople().getX() - 1 == 2)
+			if (getPeople().getX() - 1 == LEFT)
 			{
 				gotoXY(getPeople().getX() - 1, getPeople().getY());
 				cout << char(179);
+			}
 			}
 	    	break;
 	    }
@@ -217,54 +203,54 @@ void CGAME::resumeGame() {
 void CGAME::drawGame()
 {
 	// Ve~  thanh tren cung
-	gotoXY(2, 4);
+	gotoXY(LEFT, TOP);
 	cout << char(218);
-	gotoXY(116, 4);
+	gotoXY(RIGHT, TOP);
 	cout << char(191);
 
-	for (int i = 3; i < 116; i++)
+	for (int i = 3; i < RIGHT; i++)
 	{
-		gotoXY(i, 4);
+		gotoXY(i, TOP);
 		cout << char(196);
 	}
 	// Ve~ hai thanh ben canh
-	for (int i = 5; i < 28; i++)
+	for (int i = 5; i < BOTTOM; i++)
 	{
-		gotoXY(2, i);
+		gotoXY(LEFT, i);
 		cout << char(179);
 	}
-	for (int i = 5; i < 28; i++)
+	for (int i = 5; i < BOTTOM; i++)
 	{
-		gotoXY(116, i);
+		gotoXY(RIGHT, i);
 		cout << char(179);
 	}
 	// Ve~ thanh duoi cung
-	for (int i = 3; i < 116; i++)
+	for (int i = 3; i < RIGHT; i++)
 	{
-		gotoXY(i, 28);
+		gotoXY(i, BOTTOM);
 		cout << char(196);
 	}
-	gotoXY(2, 28);
+	gotoXY(LEFT, BOTTOM);
 	cout << char(192);
-	gotoXY(116, 28);
+	gotoXY(RIGHT, BOTTOM);
 	cout << char(217);
 
 	// Ve~ lan duong
 	for (int i = 1; i < 4; i++)
 	{
-		gotoXY(2, 4 + i * 6);
+		gotoXY(LEFT, TOP + i * 6);
 		cout << char(198);
 	}
 	for (int i = 1; i < 4; i++)
 	{
-		gotoXY(116, 4 + i * 6);
+		gotoXY(RIGHT, TOP + i * 6);
 		cout << char(181);
 	}
 	for (int i = 1; i < 4; i++)
 	{
-		for (int k = 3; k < 116; k++)
+		for (int k = 3; k < RIGHT; k++)
 		{
-			gotoXY(k, 4 + i * 6);
+			gotoXY(k, TOP + i * 6);
 			cout << char(205);
 		}
 	}
@@ -284,4 +270,57 @@ void PrintMenu()
 
 bool CGAME::getIsPaused() {
 	return isGamePaused;
+}
+
+void CGAME::levelUp()
+{
+	lvl += 1;
+	system("cls");
+	startGame();
+	cn.resetPoṣ̣();
+	level2Init();
+}
+
+void CGAME::resetGame()
+{
+	lvl = 1;
+	system("cls");
+	startGame();
+	level1Init();
+	cn.resetPoṣ̣();
+}
+
+
+void CGAME::level1Init() {
+	vehicles.clear();
+	animals.clear();
+	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
+	CVEHICLE* temp1 = new CCAR(5, LINE2, "Left");
+	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
+	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
+	vehicles.push_back(temp);
+	vehicles.push_back(temp1);
+	animals.push_back(temp2);
+	animals.push_back(temp3);
+}
+
+void CGAME::level2Init() {
+	vehicles.clear();
+	animals.clear();
+	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
+	CVEHICLE* temp1 = new CCAR(5, LINE2, "Left");
+	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
+	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
+	CVEHICLE* temp4 = new CTRUCK(RIGHT - 7, LINE1, "Left");
+	CVEHICLE* temp5 = new CCAR(RIGHT - 7, LINE2, "Left");
+	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE3, "Left");
+	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE4, "Left");
+	vehicles.push_back(temp);
+	vehicles.push_back(temp1);
+	vehicles.push_back(temp4);
+	/*vehicles.push_back(temp5);*/
+	animals.push_back(temp2);
+	animals.push_back(temp3);
+	animals.push_back(temp6);
+	animals.push_back(temp7);
 }

@@ -6,6 +6,7 @@
 #include"CDINAUSOR.h"
 #include"CPEOPLE.h"
 
+
 class CGAME
 {
 	bool isGamePaused = false;
@@ -13,6 +14,7 @@ class CGAME
 	vector<CANIMAL*> animals;
 	CPEOPLE cn;
 public:
+	int lvl = 1;
 	 CGAME(); //Chuẩn bị dữ liệu cho tất cả các đối tượng
 	 void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
 	 ~CGAME(); // Hủy tài nguyên đã cấp phát
@@ -32,6 +34,13 @@ public:
 	 bool getIsPaused();
 	 void printPauseGameMenu();
 	 void erasePasueGameMenu();
+	 void levelUp();
+	 void initialForStage(int);
+	 void level1Init();
+	 void level2Init();
+	 void level3Init();
+	 void level4Init();
+	 void win();
 };
 
 void PrintMenu();

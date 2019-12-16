@@ -1,4 +1,4 @@
-#include "CPEOPLE.h"
+﻿#include "CPEOPLE.h"
 
 
 void CPEOPLE::Up(int steps) {
@@ -36,8 +36,7 @@ void CPEOPLE::Left(int steps) {
 bool CPEOPLE::isImpact(const vector<CVEHICLE*>& vehicles) {
 	for (int i = 0; i < vehicles.size(); i++)
 	{
-		if (vehicles[i]->getMX() == mX && vehicles[i]->getMY() == mY) {
-			
+		if (vehicles[i]->isTouched(mX, mY)) {
 			return true;
 		}
 	}
@@ -47,7 +46,7 @@ bool CPEOPLE::isImpact(const vector<CVEHICLE*>& vehicles) {
 bool CPEOPLE::isImpact(const vector<CANIMAL*> & animals) {
 	for (int i = 0; i < animals.size(); i++)
 	{
-		if (animals[i]->getMX() == mX && animals[i]->getMY() == mY) {
+		if (animals[i]->isTouched(mX, mY)) {
 			return true;
 		}
 	}
@@ -55,8 +54,8 @@ bool CPEOPLE::isImpact(const vector<CANIMAL*> & animals) {
 }
 
 CPEOPLE::CPEOPLE() {
-	mX = 50;
-	mY = 2;
+	mX = 60;
+	mY = TOP;
 	mState = true;
 	gotoXY(mX, mY);
 	cout << "Y" << endl;
@@ -70,4 +69,31 @@ int CPEOPLE::getX()
 int CPEOPLE::getY()
 {
 	return mY;
+}
+
+void CPEOPLE::setX(int x)
+{
+	mX = x;
+}
+
+void CPEOPLE::setY(int y)
+{
+	mY = y;
+}
+
+bool CPEOPLE::isFinish() {
+	bool res;
+	mY == BOTTOM ? res = true : res = false;
+	return res;
+}
+
+void CPEOPLE::resetPoṣ̣() {
+	gotoXY(mX, mY);
+	cout << char(196);
+	mX = 60;
+	mY = TOP;
+}
+
+bool CPEOPLE::isDead() {
+	return mState;
 }

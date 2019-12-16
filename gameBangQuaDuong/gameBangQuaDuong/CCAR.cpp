@@ -1,5 +1,7 @@
 #include "CCAR.h"
 
+bool CCAR::stop;
+
 void CCAR::draw()
 {
 	gotoXY(mX, mY);
@@ -12,11 +14,15 @@ void CCAR::draw()
 CCAR::CCAR() {
 	mX = 0;
 	mY = 25;
+	beginSide = "Left";
+	stop = false;
 }
 
 CCAR::CCAR(int a, int b) {
 	mX = a;
 	mY = b;
+	beginSide = "Left";
+	stop = false;
 }
 
 CCAR::CCAR(int a, int b, string c)
@@ -24,6 +30,7 @@ CCAR::CCAR(int a, int b, string c)
 	mX = a;
 	mY = b;
 	beginSide = c;
+	stop = false;
 }
 void CCAR::Move()
 {
@@ -35,9 +42,10 @@ void CCAR::Move()
 	cout << " ";
 	if (beginSide == "Left")
 	{
+		if (stop == false)
 		mX++;
 		draw();
-		if (mX + 2 == 114)
+		if (mX + 2 == 113)
 		{
 		gotoXY(mX, mY);
 		cout << " ";
@@ -50,6 +58,7 @@ void CCAR::Move()
 	}
 	if (beginSide == "Right")
 	{
+		if (stop == false)
 		mX--;
 		draw();
 		if (mX ==0)
@@ -63,7 +72,23 @@ void CCAR::Move()
 			mX = 100;
 		}
 	}
-	
-	
-	
+}
+
+void CCAR::updateStatus() {
+	stop = !stop;
+}
+
+bool CCAR::isTouched(int x, int y) {
+	if ((mX == x && mY == y) ||
+		(mX + 1 == x && mY == y) ||
+		(mX + 2 == x && mY == y)
+		) {
+
+		return true;
+	}
+	return false;
+}
+
+int CCAR::getType() {
+	return 2;
 }

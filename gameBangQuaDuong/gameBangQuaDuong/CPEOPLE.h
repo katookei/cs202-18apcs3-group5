@@ -17,4 +17,7 @@ public:
 	bool isDead();
 	int getX();
 	int getY();
+	void setX(int);
+	void setY(int);
+	void resetPoṣ̣();
 };
