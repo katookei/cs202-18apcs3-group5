@@ -5,12 +5,15 @@ class CDINAUSOR :
 {
 	string beginSide;
 public:
-	static bool IS_STOP;
+	static bool stop;
 	CDINAUSOR();
 	CDINAUSOR(int, int);
 	CDINAUSOR(int, int, string);
 	void draw();
-	void Move(int,int);
+	void Move(int, int);
 	void Tell();
+	void updateStatus();
+	bool isTouched(int x,int y);
+	int getType();
 };
 

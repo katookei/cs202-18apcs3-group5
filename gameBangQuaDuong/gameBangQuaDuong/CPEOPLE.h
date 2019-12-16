@@ -19,4 +19,5 @@ public:
 	int getY();
 	void setX(int);
 	void setY(int);
+	void resetPoṣ̣();
 };

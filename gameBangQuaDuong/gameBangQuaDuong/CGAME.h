@@ -6,14 +6,9 @@
 #include"CDINAUSOR.h"
 #include"CPEOPLE.h"
 
-#define TOP 4
-#define BOTTOM 28
-#define LEFT 2
-#define RIGHT 116
 
 class CGAME
 {
-	int lightcolor[3] = { 12,14,10 };
 	bool isGamePaused = false;
 	vector<CVEHICLE*> vehicles;
 	vector<CANIMAL*> animals;
@@ -39,9 +34,13 @@ public:
 	 bool getIsPaused();
 	 void printPauseGameMenu();
 	 void erasePasueGameMenu();
-	 bool isFinish();
+	 void levelUp();
 	 void initialForStage(int);
-	 void light();
+	 void level1Init();
+	 void level2Init();
+	 void level3Init();
+	 void level4Init();
+	 void win();
 };
 
 void PrintMenu();

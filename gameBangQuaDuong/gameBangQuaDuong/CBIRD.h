@@ -8,7 +8,7 @@ class CBIRD :
 {
 	string beginSide;
 public:
-	static bool IS_STOP;
+	static bool stop;
 	void Move(int x, int y);
 	void Tell();
 	void Draw();
@@ -16,5 +16,8 @@ public:
 	CBIRD(int x, int y);
 	CBIRD(string a);
 	CBIRD(int x, int y, string a);
+	void updateStatus();
+	bool isTouched(int x, int y);
+	int getType();
 };
 

@@ -1,37 +1,8 @@
-#include "CGAME.h"
+﻿#include "CGAME.h"
 
 CGAME::CGAME() 
 {
-	CVEHICLE** Cars[4];
-	for (int i = 0; i < 4; ++i)
-	{
-		Cars[i] = new CVEHICLE * [4];
-	}
-	for (int i = 0; i < 4; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-			Cars[i][j] = new CCAR(LEFT + i * 4, TOP + i * 2 + 1,"Left");
-	}
-	for (int i = 0; i < 4; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-			vehicles.push_back(Cars[i][j]);
-	}
-	CVEHICLE** Trucks[4];
-	for (int i = 0; i < 4; ++i)
-	{
-		Trucks[i] = new CVEHICLE * [4];
-	}
-	for (int i = 0; i < 4; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-			Trucks[i][j] = new CTRUCK(LEFT + i * 4, TOP + i * 4 + 1, "Left");
-	}
-	for (int i = 0; i < 4; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-			vehicles.push_back(Trucks[i][j]);
-	}
+	level1Init();
 }
 
 void CGAME::updatePosPeople(int mov) {
@@ -301,40 +272,55 @@ bool CGAME::getIsPaused() {
 	return isGamePaused;
 }
 
-bool CGAME::isFinish()
+void CGAME::levelUp()
 {
-	if (getPeople().getY() == BOTTOM)
-		return true;
-	else
-		return false;
+	lvl += 1;
+	system("cls");
+	startGame();
+	cn.resetPoṣ̣();
+	level2Init();
 }
 
-void CGAME::initialForStage(int n)
+void CGAME::resetGame()
 {
-
+	lvl = 1;
+	system("cls");
+	startGame();
+	level1Init();
+	cn.resetPoṣ̣();
 }
 
-void CGAME::light()
-{
-	gotoXY(115, 32);
-	HANDLE hConsoleColor;
-	hConsoleColor = GetStdHandle(STD_OUTPUT_HANDLE);
-	while (1)
-	{
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 1; j < 5; j++)
-			{
-				SetConsoleTextAttribute(hConsoleColor, lightcolor[i]);
-				gotoXY(115, 2 + j * 6);
-				cout << char(219);
-				SetConsoleTextAttribute(hConsoleColor, 15);
-				gotoXY(115, 3 + j * 6);
-				cout << char(219) << endl;
-				gotoXY(115, 4 + j * 6);
-				cout << char(223) << endl;
-			}
-			Sleep(2000);
-		}
-	}
+
+void CGAME::level1Init() {
+	vehicles.clear();
+	animals.clear();
+	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
+	CVEHICLE* temp1 = new CCAR(5, LINE2, "Left");
+	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
+	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
+	vehicles.push_back(temp);
+	vehicles.push_back(temp1);
+	animals.push_back(temp2);
+	animals.push_back(temp3);
+}
+
+void CGAME::level2Init() {
+	vehicles.clear();
+	animals.clear();
+	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
+	CVEHICLE* temp1 = new CCAR(5, LINE2, "Left");
+	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
+	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
+	CVEHICLE* temp4 = new CTRUCK(RIGHT - 7, LINE1, "Left");
+	CVEHICLE* temp5 = new CCAR(RIGHT - 7, LINE2, "Left");
+	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE3, "Left");
+	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE4, "Left");
+	vehicles.push_back(temp);
+	vehicles.push_back(temp1);
+	vehicles.push_back(temp4);
+	/*vehicles.push_back(temp5);*/
+	animals.push_back(temp2);
+	animals.push_back(temp3);
+	animals.push_back(temp6);
+	animals.push_back(temp7);
 }
