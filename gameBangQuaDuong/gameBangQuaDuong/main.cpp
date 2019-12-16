@@ -4,7 +4,10 @@ using namespace std;
 bool IS_RUNNING = true;
 int KEY = NULL;
 CGAME newGAME;
+mutex g_i_mutex;
+bool IS_LOSE = false;
 
+void menuScreen(int n);
 
 void exitGame(thread *t1) {
 	system("cls");
@@ -22,7 +25,6 @@ void ThreadFunc1() {
 	int count = 0;
 	int type = 0;
 	while (IS_RUNNING) {
-		
 		if (!newGAME.getIsPaused()) {
 			gotoXY(2, 3);
 			cout << "level " << newGAME.lvl;
@@ -39,7 +41,6 @@ void ThreadFunc1() {
 				{
 					if (type != newGAME.getVehicle()[i]->getType()) {
 						type = newGAME.getVehicle()[i]->getType();
-						cout << type; 
 						newGAME.getVehicle()[i]->updateStatus();
 					}
 				}
@@ -61,9 +62,36 @@ void ThreadFunc1() {
 			if (newGAME.getPeople().isImpact(newGAME.getVehicle()) ||
 				newGAME.getPeople().isImpact(newGAME.getAnimal())) {
 				IS_RUNNING = false;
-				newGAME.resetGame();
-				count = 0;
-				IS_RUNNING = true;
+				IS_LOSE = true;
+				printMenuAfterDead();
+				int temp;
+				temp = _getch();
+				switch (temp)
+				{
+				case 49:
+				{
+					newGAME.resetGame();
+					count = 0;
+					IS_RUNNING = true;
+					IS_LOSE = false;
+					menuScreen(temp);
+					break;
+				}
+				case 50:
+				{
+					cout << "Load Game";
+					break;
+				}
+				case 51:
+				{
+					menuScreen(52);
+					break;
+				}
+				default:
+				{
+					break;
+				}
+				}
 			}
 			if (newGAME.getPeople().isFinish())
 			{
@@ -77,8 +105,7 @@ void ThreadFunc1() {
 
 void menuScreen(int option)
 {
-
-	while (option != 52)
+	while (option != 52 && !IS_LOSE)
 	{
 		switch (option)
 		{
@@ -89,30 +116,33 @@ void menuScreen(int option)
 			system("cls");
 			newGAME.startGame();
 			thread t1(ThreadFunc1);
-			
 			fixConsoleWindow();
 			while (1)
 			{
-				int temp = toupper(_getch());
-				KEY = temp;
-				switch (KEY)
-				{
-				case 27: {
-					newGAME.pauseGame();
-					break;
-				}
-				case 52:
-				{
-					exitGame(&t1);
-					return;
-				}
-				case 49:
-				{
-					t1.join();
-					menuScreen(KEY);
-					break;
-				}
-				}
+					int temp = toupper(_getch());
+					KEY = temp;
+					switch (KEY)
+					{
+					case 27: {
+						newGAME.pauseGame();
+						break;
+					}
+					case 52:
+					{
+						exitGame(&t1);
+						return;
+					}
+					case 49:
+					{
+						t1.join();
+						menuScreen(KEY);
+						break;
+					}
+					default:
+					{
+						break;
+					}
+					}
 			}
 			break;
 		}

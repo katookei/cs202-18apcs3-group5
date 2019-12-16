@@ -324,3 +324,16 @@ void CGAME::level2Init() {
 	animals.push_back(temp6);
 	animals.push_back(temp7);
 }
+
+void printMenuAfterDead()
+{
+	system("cls");
+	gotoXY(45, 9);
+	cout << "You've died choose your option";
+	gotoXY(50, 10);
+	cout << "1. Restart";
+	gotoXY(50, 11);
+	cout << "2. Load game";
+	gotoXY(50, 12);
+	cout << "3. Exit game";
+}
