@@ -120,58 +120,58 @@ void menuScreen(int option)
 			gotoXY(60, 3);
 			IS_RUNNING = true;
 			system("cls");
-			newGAME.drawGame();
+			newGAME.startGame();
 			thread t1(ThreadFunc1);
 			fixConsoleWindow();
 			while (1)
 			{
-					int temp = toupper(_getch());
-					KEY = temp;
-					switch (KEY)
+				int temp = toupper(_getch());
+				KEY = temp;
+				switch (KEY)
+				{
+				case 27: {
+					newGAME.pauseGame();
+					break;
+				}
+				case 52:
+				{
+					exitGame(&t1);
+					return;
+				}
+				case 49:
+				{
+					if (IS_LOSE)
 					{
-					case 27: {
-						newGAME.pauseGame();
+						newGAME.resetGame();
+						IS_RUNNING = true;
+						menuScreen(49);
 						break;
 					}
-					case 52:
+					else
 					{
-						exitGame(&t1);
-						return;
-					}
-					case 49:
-					{
-						if (IS_LOSE)
-						{
-							newGAME.resetGame();
-							IS_RUNNING = true;
-							menuScreen(49);
-							break;
-						}
-						else
-						{
-							t1.join();
-							menuScreen(KEY);
-							break;
-						}
-					}
-					case 50:
-					{
-						if (IS_LOSE)
-						{
-							cout << "Load Game";
-							break;
-						}
-					}
-					case 51:
-					{
-						exitGame(&t1);
+						t1.join();
+						menuScreen(KEY);
 						break;
 					}
-					default:
+				}
+				case 50:
+				{
+					if (IS_LOSE)
 					{
+						cout << "Load Game";
 						break;
 					}
-					}
+				}
+				case 51:
+				{
+					exitGame(&t1);
+					break;
+				}
+				default:
+				{
+					break;
+				}
+				}
 			}
 			break;
 		}
@@ -217,7 +217,6 @@ void menuScreen(int option)
 		}
 		default:
 		{
-			option = _getch();
 			break;
 		}
 		}
