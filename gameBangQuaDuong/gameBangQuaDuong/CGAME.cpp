@@ -316,13 +316,19 @@ void CGAME::levelUp()
 	}
 	case 6:
 	{
-	//	win();
+		lvl = 1;
+		win();
+		level1Init();
 		break;
 	}
 	}
 
 }
 
+void CGAME::win() {
+	gotoXY(50, 14);
+	cout << "You've finished the game";
+}
 void CGAME::resetGame()
 {
 	lvl = 1;
@@ -635,7 +641,7 @@ void CGAME::loadGame() {
 	}
 	case 6:
 	{
-		//	win();
+		win();
 		break;
 	}
 	}
