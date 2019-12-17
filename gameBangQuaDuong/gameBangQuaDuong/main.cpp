@@ -119,6 +119,7 @@ void menuScreen(int option)
 		{
 			gotoXY(60, 3);
 			IS_RUNNING = true;
+			IS_LOSE = false;
 			system("cls");
 			newGAME.startGame();
 			thread t1(ThreadFunc1);
@@ -144,6 +145,7 @@ void menuScreen(int option)
 					{
 						newGAME.resetGame();
 						IS_RUNNING = true;
+						IS_LOSE = false;
 						menuScreen(49);
 						break;
 					}
@@ -158,7 +160,48 @@ void menuScreen(int option)
 				{
 					if (IS_LOSE)
 					{
-						cout << "Load Game";
+						newGAME.loadGame();
+						gotoXY(60, 3);
+						IS_RUNNING = true;
+						IS_LOSE = false;
+						system("cls");
+						newGAME.drawGame();
+						thread t1(ThreadFunc1);
+						fixConsoleWindow();
+						while (1)
+						{
+							int temp = toupper(_getch());
+							KEY = temp;
+							switch (KEY)
+							{
+							case 27: {
+								newGAME.pauseGame();
+								break;
+							}
+							case 52:
+							{
+								exitGame(&t1);
+								return;
+							}
+							case 49:
+							{
+								if (IS_LOSE)
+								{
+									newGAME.resetGame();
+									IS_RUNNING = true;
+									IS_LOSE = false;
+									menuScreen(49);
+									break;
+								}
+								else 
+								{
+									t1.join();
+									menuScreen(KEY);
+									break;
+								}
+							}
+							}
+						}
 						break;
 					}
 				}
@@ -201,8 +244,20 @@ void menuScreen(int option)
 				}
 				case 49:
 				{
-					t1.join();
-					menuScreen(KEY);
+					if (IS_LOSE)
+					{
+						newGAME.resetGame();
+						IS_RUNNING = true;
+						IS_LOSE = false;
+						menuScreen(49);
+						break;
+					}
+					else
+					{
+						t1.join();
+						menuScreen(KEY);
+						break;
+					}
 					break;
 				}
 				}
@@ -227,6 +282,7 @@ void menuScreen(int option)
 
 
 void main() {
+	setcursor(0, 0);
 	int option;
 	PrintMenu();
 	option = _getch();

@@ -21,4 +21,5 @@ using namespace std;
 
 void gotoXY(int, int);
 void fixConsoleWindow();
+void setcursor(bool, DWORD);
 //mutex g_i_mutex;
