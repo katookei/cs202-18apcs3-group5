@@ -61,7 +61,7 @@ void CCAR::Move()
 		if (stop == false)
 		mX--;
 		draw();
-		if (mX ==0)
+		if (mX == 4)
 		{
 			gotoXY(mX, mY);
 			cout << " ";
@@ -89,6 +89,7 @@ bool CCAR::isTouched(int x, int y) {
 	return false;
 }
 
-int CCAR::getType() {
-	return 2;
+int CCAR::getType() 
+{
+	return type;
 }

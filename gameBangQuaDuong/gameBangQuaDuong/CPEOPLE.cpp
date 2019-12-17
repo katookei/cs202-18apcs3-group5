@@ -2,6 +2,7 @@
 
 
 void CPEOPLE::Up(int steps) {
+	PlaySound("step.wav", NULL, SND_ASYNC);
 	gotoXY(mX, mY);
 	cout << " " << endl;
 	mY -= steps;
@@ -10,6 +11,7 @@ void CPEOPLE::Up(int steps) {
 }
 
 void CPEOPLE::Down(int steps) {
+	PlaySound("step.wav", NULL, SND_ASYNC);
 	gotoXY(mX, mY);
 	cout << " " << endl;
 	mY += steps;
@@ -18,6 +20,7 @@ void CPEOPLE::Down(int steps) {
 }
 
 void CPEOPLE::Right(int steps) {
+	PlaySound("step.wav", NULL, SND_ASYNC);
 	gotoXY(mX, mY);
 	cout << " " << endl;
 	mX += steps;
@@ -26,6 +29,7 @@ void CPEOPLE::Right(int steps) {
 }
 
 void CPEOPLE::Left(int steps) {
+	PlaySound("step.wav", NULL, SND_ASYNC);
 	gotoXY(mX, mY);
 	cout << " " << endl;
 	mX -= steps;
@@ -57,8 +61,12 @@ CPEOPLE::CPEOPLE() {
 	mX = 60;
 	mY = TOP;
 	mState = true;
-	gotoXY(mX, mY);
-	cout << "Y" << endl;
+}
+
+CPEOPLE::CPEOPLE(int x, int y) {
+	mX = x;
+	mY = y;
+	mState = true;
 }
 
 int CPEOPLE::getX()
@@ -95,5 +103,13 @@ void CPEOPLE::resetPoṣ̣() {
 }
 
 bool CPEOPLE::isDead() {
+	gotoXY(50, 14);
+	cout << "GAME OVER!!";
+	PlaySound("die.wav", NULL, SND_FILENAME);
 	return mState;
+}
+
+void CPEOPLE::draw() {
+	gotoXY(mX, mY);
+	cout << "Y";
 }

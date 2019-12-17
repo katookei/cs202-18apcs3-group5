@@ -24,7 +24,7 @@ void CBIRD::Move(int x, int y)
 		mX += 1;
 	}
     Draw();
-	if (mX == 111 )
+	if (mX == RIGHT - 3 )
 	{
 		gotoXY(mX, mY);
 		cout << " ";
@@ -85,5 +85,5 @@ bool CBIRD::isTouched(int x, int y) {
 }
 
 int CBIRD::getType() {
-	return 1;
+	return type;
 }

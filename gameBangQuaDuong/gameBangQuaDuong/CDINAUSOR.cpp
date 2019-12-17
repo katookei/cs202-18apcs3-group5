@@ -96,7 +96,7 @@ void CDINAUSOR::Move(int, int)
 			cout << " " << endl;
 			gotoXY(mX + 2, mY - 2);
 			cout << " " << endl;
-			mX = 0;
+			mX = 5;
 		}
 	}
 	else if (beginSide =="Right")
@@ -114,7 +114,7 @@ void CDINAUSOR::Move(int, int)
 		if (stop == false)
 			--mX;
 		draw();
-		if (mX - 2 == 0)
+		if (mX - 5 == 0)
 		{
 			gotoXY(mX, mY);
 			cout << " ";
@@ -161,5 +161,5 @@ bool CDINAUSOR::isTouched(int x, int y) {
 }
 
 int CDINAUSOR::getType() {
-	return 3;
+	return type;
 }

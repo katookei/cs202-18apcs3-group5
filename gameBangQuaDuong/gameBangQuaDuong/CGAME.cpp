@@ -119,6 +119,7 @@ CGAME::~CGAME() {
 void CGAME::startGame() 
 {
 	drawGame();
+	cn.draw();
 }
 
 CPEOPLE CGAME::getPeople() {
@@ -138,6 +139,11 @@ vector<CVEHICLE*>& CGAME::getVehicle() {
 
 vector<CANIMAL*>& CGAME::getAnimal() {
 	return animals;
+}
+
+vector<light>& CGAME::getlight()
+{
+	return trafficlight;
 }
 
 void CGAME::pauseGame() {
@@ -176,15 +182,24 @@ void CGAME::printPauseGameMenu() {
 	cout << "Quit game(Q)" << endl;
 	while (1) {
 		bool pauseFlag = true;
-		char temp = toupper(_getch());
+		int temp = toupper(_getch());
 		gotoXY(50, 14);
 		cout << "You pressed: " << temp;
 		switch (temp)
 		{
-		case 13: {
+		case 82: {
 			pauseFlag = false;
 			erasePasueGameMenu();
 			resumeGame();
+			break;
+		}
+		case 83: {
+			pauseFlag = false;
+			saveGame();
+			break;
+		}
+		case 81: {
+			exit(0);
 			break;
 		}
 		default:
@@ -256,16 +271,15 @@ void CGAME::drawGame()
 	}
 }
 
+
 void PrintMenu()
 {
 	gotoXY(50, 10);
 	cout << "1. Start game";
 	gotoXY(50, 11);
-	cout << "2. Save game";
+	cout << "2. Load game";
 	gotoXY(50, 12);
-	cout << "3. Load game";
-	gotoXY(50, 13);
-	cout << "4. Exit game";
+	cout << "3. Exit game";
 }
 
 bool CGAME::getIsPaused() {
@@ -278,7 +292,35 @@ void CGAME::levelUp()
 	system("cls");
 	startGame();
 	cn.resetPoṣ̣();
-	level2Init();
+	switch (lvl)
+	{
+	case 2:
+	{
+		level2Init();
+		break;
+	}
+	case 3:
+	{
+		level3Init();
+		break;
+	}
+	case 4:
+	{
+		level4Init();
+		break;
+	}
+	case 5:
+	{
+		level5Init();
+		break;
+	}
+	case 6:
+	{
+	//	win();
+		break;
+	}
+	}
+
 }
 
 void CGAME::resetGame()
@@ -290,8 +332,8 @@ void CGAME::resetGame()
 	cn.resetPoṣ̣();
 }
 
-
 void CGAME::level1Init() {
+	cn.draw();
 	vehicles.clear();
 	animals.clear();
 	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
@@ -305,6 +347,7 @@ void CGAME::level1Init() {
 }
 
 void CGAME::level2Init() {
+	cn.draw();
 	vehicles.clear();
 	animals.clear();
 	CVEHICLE* temp = new CTRUCK(5, LINE1, "Left");
@@ -312,15 +355,306 @@ void CGAME::level2Init() {
 	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
 	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
 	CVEHICLE* temp4 = new CTRUCK(RIGHT - 7, LINE1, "Left");
+	CVEHICLE* temp8 = new CTRUCK(RIGHT - 10, LINE1, "Left");
 	CVEHICLE* temp5 = new CCAR(RIGHT - 7, LINE2, "Left");
+	CVEHICLE* temp9 = new CCAR(RIGHT - 10, LINE2, "Left");
 	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE3, "Left");
 	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE4, "Left");
 	vehicles.push_back(temp);
 	vehicles.push_back(temp1);
 	vehicles.push_back(temp4);
-	/*vehicles.push_back(temp5);*/
+	vehicles.push_back(temp5);
 	animals.push_back(temp2);
 	animals.push_back(temp3);
 	animals.push_back(temp6);
 	animals.push_back(temp7);
+}
+
+void CGAME::level3Init()
+{
+	vehicles.clear();
+	animals.clear();
+#pragma region VEHICLES
+	CVEHICLE* temp = new CTRUCK(7, LINE1, "Left");
+	CVEHICLE* temp1 = new CCAR(7, LINE2, "Left");
+	CVEHICLE* temp4 = new CTRUCK(RIGHT - 7, LINE1, "Right");
+	CVEHICLE* temp5 = new CCAR(RIGHT - 7, LINE2, "Right");
+	CVEHICLE* Cars[5];
+	CVEHICLE* Trucks[5];
+	for (int i = 0; i < 5; ++i)
+	{
+		Cars[i] = new CCAR(5 + i * 7, LINE2 + 2, "Left");
+		vehicles.push_back(Cars[i]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE1 - 2, "Left");
+		vehicles.push_back(Trucks[i]);
+	}
+#pragma endregion
+
+#pragma region ANIMAL
+	CANIMAL* temp2 = new CBIRD(5, LINE3, "Left");
+	CANIMAL* temp3 = new CDINAUSOR(5, LINE4, "Left");
+	CANIMAL* temp6 = new CBIRD(RIGHT - 7, LINE3, "Right");
+	CANIMAL* temp7 = new CDINAUSOR(RIGHT - 7, LINE4, "Right");
+	CANIMAL* Birds[5];
+	CANIMAL* Dinausors[5];
+	for (int i = 0; i < 5; ++i)
+	{
+		Birds[i] = new CBIRD(5 +  i * 7, LINE3 - 2 , "Left");
+		animals.push_back(Birds[i]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Dinausors[i] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4 + 2, "Right");
+		animals.push_back(Dinausors[i]);
+	}
+#pragma endregion
+
+	vehicles.push_back(temp);
+	vehicles.push_back(temp1);
+	vehicles.push_back(temp4);
+	vehicles.push_back(temp5);
+	animals.push_back(temp2);
+	animals.push_back(temp3);
+	animals.push_back(temp6);
+	animals.push_back(temp7);
+}
+
+void CGAME::level5Init()
+{
+	vehicles.clear();
+	animals.clear();
+#pragma region VEHICLES
+	CVEHICLE* Cars[15];
+	CVEHICLE* Trucks[15];
+	for (int i = 0; i < 5; ++i)
+	{
+		Cars[i] = new CCAR(5 + i * 7, LINE2 + 2, "Left");
+		vehicles.push_back(Cars[i]);
+		Cars[i + 5] = new CCAR(5 + i * 7, LINE2 - 2, "Left");
+		vehicles.push_back(Cars[i + 5]);
+		Cars[i + 10] = new CCAR((LEFT + RIGHT) / 3 + i * 7, LINE1, "Left");
+		vehicles.push_back(Cars[i + 10]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE3 - 2, "Left");
+		vehicles.push_back(Trucks[i]);
+		Trucks[i + 5] = new CTRUCK(RIGHT - 3, LINE1 + 2, "Right");
+		vehicles.push_back(Trucks[i + 5]);
+		Trucks[i + 10] = new CTRUCK((LEFT + RIGHT) * 2 / 3 - i * 7, LINE2, "Right");
+		vehicles.push_back(Trucks[i + 10]);
+
+	}
+#pragma endregion
+
+#pragma region ANIMAL
+	CANIMAL* Birds[15];
+	CANIMAL* Dinausors[15];
+	for (int i = 0; i < 5; ++i)
+	{
+		Birds[i] = new CBIRD(5 + i * 7, LINE4 - 2, "Left");
+		animals.push_back(Birds[i]);
+		Birds[i + 5] = new CBIRD(5 + i * 7, LINE2 - 2, "Left");
+		animals.push_back(Birds[i + 5]);
+		Birds[i + 10] = new CBIRD((LEFT + RIGHT) / 3 + i * 7, LINE3, "Left");
+		animals.push_back(Birds[i + 10]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Dinausors[i] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4 + 2, "Right");
+		animals.push_back(Dinausors[i]);
+		Dinausors[i + 5] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE2 + 2, "Right");
+		animals.push_back(Dinausors[i + 5]);
+		Dinausors[i + 10] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4, "Right");
+		animals.push_back(Dinausors[i + 10]);
+	}
+#pragma endregion
+}
+
+void CGAME::level4Init()
+{
+	vehicles.clear();
+	animals.clear();
+#pragma region VEHICLES
+	CVEHICLE* Cars[10];
+	CVEHICLE* Trucks[10];
+	for (int i = 0; i < 5; ++i)
+	{
+		Cars[i] = new CCAR(5 + i * 7, LINE2 + 2, "Left");
+		vehicles.push_back(Cars[i]);
+		Cars[i + 5] = new CCAR(5 + i * 7, LINE2 - 2, "Left");
+		vehicles.push_back(Cars[i + 5]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Trucks[i] = new CTRUCK(5 + i * 7, LINE1 - 2, "Left");
+		vehicles.push_back(Trucks[i]);
+		Trucks[i + 5] = new CTRUCK(RIGHT - 3, LINE1 + 2, "Right");
+		vehicles.push_back(Trucks[i+5]);
+	}
+#pragma endregion
+
+#pragma region ANIMAL
+	CANIMAL* Birds[10];
+	CANIMAL* Dinausors[10];
+	for (int i = 0; i < 5; ++i)
+	{
+		Birds[i] = new CBIRD(5 + i * 7, LINE4 - 2, "Left");
+		animals.push_back(Birds[i]);
+		Birds[i + 5] = new CBIRD(5 + i * 7, LINE2 - 2, "Left");
+		animals.push_back(Birds[i + 5]);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		Dinausors[i] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE4 + 2, "Right");
+		animals.push_back(Dinausors[i]);
+		Dinausors[i + 5] = new CDINAUSOR(RIGHT - i * 7 - 3, LINE2 + 2, "Right");
+		animals.push_back(Dinausors[i + 5]);
+	}
+#pragma endregion
+}
+
+
+light::light()
+{
+}
+
+light::~light()
+{
+}
+
+light::light(int x, int y, int a, int b)
+{
+	mX = x;
+	mY = y;
+	color = a;
+	object = b;
+}
+void light::changecolor()
+{
+	color = !color;
+}
+
+void light :: draw()
+{
+	HANDLE hConsoleColor;
+	hConsoleColor = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsoleColor, lightcolor[color]);
+	gotoXY(mX,mY);
+	cout << char(219);
+	SetConsoleTextAttribute(hConsoleColor, 15);
+	gotoXY(mX,mY+1);
+	cout << char(219) << endl;
+	gotoXY(mX,mY+2);
+	cout << char(223) << endl;
+}
+
+int light::getcolor()
+{
+	return color;
+}
+
+void CGAME::setlight()
+{
+	light a(115, 8, 1, 0);
+	light b(115, 14, 1, 1);
+	light c(115, 20, 0, 2);
+	light d(115, 26, 0, 3);
+	trafficlight.push_back(a);
+	trafficlight.push_back(b);
+	trafficlight.push_back(c);
+	trafficlight.push_back(d);
+}
+
+int light::getobject()
+{
+	return object;
+}
+
+
+void CGAME::saveGame() {
+	string temp;
+	ofstream fout;
+	gotoXY(50, 14);
+	cout << "input save name:";
+	cin >> temp;
+	fout.open(temp + ".txt", ios::trunc);
+	fout << lvl;
+	gotoXY(50, 20);
+	cout << "Game saved!" << endl;
+	Sleep(1000);
+	system("cls");
+	drawGame();
+	cn.draw();
+	resumeGame();
+
+}
+
+
+void CGAME::loadGame() {
+    string temp;
+    ifstream fin;
+    gotoXY(50, 14);
+    cout << "input load name:";
+    cin >> temp;
+    fin.open(temp + ".txt");
+	while (!fin.is_open()) {
+		gotoXY(50, 14);
+		cout << "                                                                                                  " << endl;
+		gotoXY(50, 14);
+		cout << "No file with inputed name, please input again:" << endl;
+		gotoXY(96, 14);
+		cin >> temp;
+		fin.open(temp + ".txt");
+	}
+	fin >> lvl;
+	switch (lvl)
+	{
+	case 2:
+	{
+		level2Init();
+		break;
+	}
+	case 3:
+	{
+		level3Init();
+		break;
+	}
+	case 4:
+	{
+		level4Init();
+		break;
+	}
+	case 5:
+	{
+		level5Init();
+		break;
+	}
+	case 6:
+	{
+		//	win();
+		break;
+	}
+	}
+
+}
+
+
+
+
+
+void printMenuAfterDead()
+{
+	system("cls");
+	gotoXY(45, 9);
+	cout << "You've died choose your option";
+	gotoXY(50, 10);
+	cout << "1. Restart";
+	gotoXY(50, 11);
+	cout << "2. Load game";
+	gotoXY(50, 12);
+	cout << "3. Exit game";
 }
